@@ -21,13 +21,13 @@ CREATE TABLE IF NOT EXISTS accounts (
 
 CREATE TABLE IF NOT EXISTS atm (
     id smallint(5) NOT NULL AUTO_INCREMENT,
-    fivehundred tinyint(3),
-    twohundred tinyint(3),
-    onehundred tinyint(3),
-    fifty tinyint(3),
-    twenty tinyint(3),
-    ten tinyint(3),
-    five tinyint(3),
+    fivehundred smallint(3),
+    twohundred smallint(3),
+    onehundred smallint(3),
+    fifty smallint(3),
+    twenty smallint(3),
+    ten smallint(3),
+    five smallint(3),
     zip varchar(5) NOT NULL,
     PRIMARY KEY(id)
 );
