@@ -13,13 +13,13 @@ namespace SpasBank.Classes
 {
     public class User
     {
-        public readonly string Id;
         public readonly string Password;
         public readonly double Balance;
+        public readonly int accountId;
 
-        public User(string id, string pass)
+        public User(int id, string pass)
         {
-            Id = id;
+            accountId = id;
             Password = pass;
         }
 
@@ -37,23 +37,23 @@ namespace SpasBank.Classes
             return null;
         }
 
+        public void Deposit(int[] amounts)
+        {
+            var sum = amounts.Sum();
+            Atm.Deposit(amounts);
+            UpdateBalance(sum);
+        }
+
         private bool UpdateBalance(double amount)
         {
+            //ToDo: use FloApi to update balance
             return false;
         }
 
         private double GetBalance()
         {
-            var sql = new MySqlCompiler().Compile(new SqlKata.Query("account as acc")
-                .Select("balance")
-                .Where("humanId", this.Id)
-                .Join("user", "human.id", "acc.humanid"));
-
-            double balance;
-            using (var con = new SqlConnection())
-            {
-                balance = con(sql.Sql);
-            }
+            double balance = 0;
+            //ToDo: Use FloApi to getbalance for account
             return balance;
         }
     }
