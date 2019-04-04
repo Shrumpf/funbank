@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spasbank", "SpasBank\Spasbank.csproj", "{BE03C355-B24E-4FB6-B808-71B729E082DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spassbanktest", "Spassbanktest\Spassbanktest.csproj", "{258C5485-355C-4704-8C3B-1516829810FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE03C355-B24E-4FB6-B808-71B729E082DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE03C355-B24E-4FB6-B808-71B729E082DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE03C355-B24E-4FB6-B808-71B729E082DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE03C355-B24E-4FB6-B808-71B729E082DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{258C5485-355C-4704-8C3B-1516829810FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{258C5485-355C-4704-8C3B-1516829810FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{258C5485-355C-4704-8C3B-1516829810FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{258C5485-355C-4704-8C3B-1516829810FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A6D34B95-2601-433F-9F30-BDE4B4A7B8E9}
+	EndGlobalSection
+EndGlobal
