@@ -1,8 +1,8 @@
 INSERT INTO humans (pass, name, firstname, rights)
 VALUES ('12345', 'Doe', 'Customer', 0);
 
-INSERT INTO accounts (humanId, balance)
-SELECT LAST_INSERT_ID(), 1337
+INSERT INTO accounts (humanId, pass, balance)
+SELECT LAST_INSERT_ID(), '12345', 1337
 FROM humans
 WHERE humans.id = LAST_INSERT_ID();
 

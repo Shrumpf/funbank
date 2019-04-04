@@ -8,13 +8,16 @@ CREATE TABLE IF NOT EXISTS humans (
     name varchar(64) NOT NULL,
     firstname varchar(64) NOT NULL,
     rights tinyint DEFAULT 0 NOT NULL,
+    token varchar(255),
     PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS accounts (
     id smallint(5) NOT NULL AUTO_INCREMENT,
     humanId smallint(5) NOT NULL,
+    pass varchar(64) NOT NULL,
     balance DOUBLE(10, 2),
+    token varchar(255),
     PRIMARY KEY (id),
     FOREIGN KEY (humanId) REFERENCES humans(id)
 );
