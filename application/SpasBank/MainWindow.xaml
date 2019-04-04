@@ -8,33 +8,34 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid Margin="0">
         <Grid x:Name="LoginGrid" HorizontalAlignment="Left" Height="351" Margin="55,27,0,0" VerticalAlignment="Top" Width="687" Visibility="Collapsed">
-            <TextBox Height="23" Margin="220,86,211,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+            <TextBox x:Name="AccountNumberField" Height="23" Margin="220,86,211,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <Label Content="Kontonummer:" HorizontalAlignment="Left" Margin="126,82,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.207,0.423"/>
-            <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Height="44" Margin="232,236,0,0" VerticalAlignment="Top" Width="220" Click="Button_Click_1" FontSize="24"/>
-            <PasswordBox HorizontalAlignment="Left" Margin="220,138,0,0" VerticalAlignment="Top" Width="256"/>
+            <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Height="44" Margin="232,236,0,0" VerticalAlignment="Top" Width="220" Click="LoginButton_Click" FontSize="24"/>
+            <PasswordBox x:Name="PasswordField" HorizontalAlignment="Left" Margin="220,138,0,0" VerticalAlignment="Top" Width="256"/>
             <Label Content="Passwort:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="155,134,0,0" RenderTransformOrigin="0.632,1.462"/>
         </Grid>
-        <Grid x:Name="MainMenuGrid" Margin="0,0,-2,0" Visibility="Collapsed">
-            <Button Content="Abheben" HorizontalAlignment="Left" Height="70" Margin="239,30,0,0" VerticalAlignment="Top" Width="326" Click="Button_Click_2" FontSize="48"/>
-            <Button Content="Einzahlen" HorizontalAlignment="Left" Height="70" Margin="239,126,0,0" VerticalAlignment="Top" Width="326" Click="Button_Click_2" FontSize="48"/>
-            <Button Content="Überweisen" HorizontalAlignment="Left" Margin="239,222,0,127" Width="326" Click="Button_Click_2" FontSize="48"/>
-            <Button Content="Abmelden" HorizontalAlignment="Left" Margin="239,317,0,32" Width="326" Click="Button_Click_2" FontSize="48"/>
+        <Grid x:Name="MainMenuGrid" Margin="0,0,-2,0" Visibility="Visible">
+            <Button x:Name="WithdrawMenuButton" Content="Abheben" HorizontalAlignment="Left" Height="70" Margin="61,26,0,0" VerticalAlignment="Top" Width="326" Click="WithdrawMenuButton_Click" FontSize="48"/>
+            <Button x:Name="DepositMenuButton" Content="Einzahlen" HorizontalAlignment="Left" Height="70" Margin="439,26,0,0" VerticalAlignment="Top" Width="326" Click="DepositMenuButton_Click" FontSize="48"/>
+            <Button x:Name="TransactionMenuButton" Content="Überweisung" HorizontalAlignment="Left" Margin="61,138,0,211" Width="326" Click="TransactionMenuButton_Click" FontSize="48"/>
+            <Button x:Name="LogoutButton" Content="Abmelden" HorizontalAlignment="Left" Margin="239,317,0,32" Width="326" Click="LogoutButton_Click" FontSize="48"/>
+            <Button x:Name="BalanceMenuButton" Content="Kontostand" HorizontalAlignment="Left" Margin="439,138,0,211" Width="326" Click="BalanceMenuButton_Click" FontSize="48"/>
         </Grid>
         <Grid x:Name="WithdrawGrid" Margin="0,0,0,120" Visibility="Collapsed">
-            <TextBox Height="54" Margin="239,60,227,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36"/>
+            <TextBox x:Name="WithdrawAmountBox" Height="54" Margin="239,60,227,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36"/>
             <Label Content="Menge:" Margin="110,56,553,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,-0.154" FontSize="36"/>
-            <Button Content="Abheben" Margin="239,137,227,0" Click="Button_Click_2" FontSize="48" Height="80" VerticalAlignment="Top"/>
+            <Button x:Name="WithdrawActionButton" Content="Abheben" Margin="239,137,227,0" Click="WithdrawActionButton_Click" FontSize="48" Height="80" VerticalAlignment="Top"/>
         </Grid>
         <Grid x:Name="DepositGrid" Margin="0,0,0,120" Visibility="Collapsed">
-            <Button Content="Einzahlen" Margin="233,175,233,0" Click="Button_Click_2" FontSize="48" Height="80" VerticalAlignment="Top"/>
+            <Button x:Name="DepositActionButton" Content="Einzahlen" Margin="233,175,233,0" Click="DepositActionButton_Click" FontSize="48" Height="80" VerticalAlignment="Top"/>
             <Grid Height="142" Margin="42,10,88,0" VerticalAlignment="Top">
-                <TextBox HorizontalAlignment="Left" Height="50" Margin="95,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" FontSize="36" TextChanged="TextBox_TextChanged" TextAlignment="Right"/>
-                <TextBox HorizontalAlignment="Left" Height="50" Margin="174,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" FontSize="36" TextChanged="TextBox_TextChanged" TextAlignment="Right"/>
-                <TextBox HorizontalAlignment="Left" Height="50" Margin="253,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" FontSize="36" TextChanged="TextBox_TextChanged" TextAlignment="Right"/>
-                <TextBox HorizontalAlignment="Left" Height="50" Margin="332,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" FontSize="36" TextChanged="TextBox_TextChanged" TextAlignment="Right"/>
-                <TextBox HorizontalAlignment="Left" Height="50" Margin="411,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" FontSize="36" TextChanged="TextBox_TextChanged" TextAlignment="Right"/>
-                <TextBox HorizontalAlignment="Left" Height="50" Margin="490,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" FontSize="36" TextChanged="TextBox_TextChanged" TextAlignment="Right"/>
-                <TextBox HorizontalAlignment="Left" Height="50" Margin="569,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" FontSize="36" TextChanged="TextBox_TextChanged" TextAlignment="Right"/>
+                <TextBox x:Name="FiveHundredBox"  HorizontalAlignment="Left" Height="50" Margin="95,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" FontSize="36" TextChanged="TextBox_TextChanged" TextAlignment="Right"/>
+                <TextBox x:Name="TwoHundredBox" HorizontalAlignment="Left" Height="50" Margin="174,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" FontSize="36" TextChanged="TextBox_TextChanged" TextAlignment="Right"/>
+                <TextBox x:Name="OneHundredBox" HorizontalAlignment="Left" Height="50" Margin="253,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" FontSize="36" TextChanged="TextBox_TextChanged" TextAlignment="Right"/>
+                <TextBox x:Name="FiftyBox" HorizontalAlignment="Left" Height="50" Margin="332,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" FontSize="36" TextChanged="TextBox_TextChanged" TextAlignment="Right"/>
+                <TextBox x:Name="TwentyBox" HorizontalAlignment="Left" Height="50" Margin="411,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" FontSize="36" TextChanged="TextBox_TextChanged" TextAlignment="Right"/>
+                <TextBox x:Name="TenBox" HorizontalAlignment="Left" Height="50" Margin="490,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" FontSize="36" TextChanged="TextBox_TextChanged" TextAlignment="Right"/>
+                <TextBox x:Name="FiveBox" HorizontalAlignment="Left" Height="50" Margin="569,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" FontSize="36" TextChanged="TextBox_TextChanged" TextAlignment="Right"/>
                 <Label Content="500€" HorizontalAlignment="Left" Margin="95,22,0,0" VerticalAlignment="Top" FontSize="24"/>
                 <Label Content="200€" HorizontalAlignment="Left" Margin="174,22,0,0" VerticalAlignment="Top" FontSize="24"/>
                 <Label Content="100€" HorizontalAlignment="Left" Margin="253,22,0,0" VerticalAlignment="Top" FontSize="24"/>
@@ -52,19 +53,19 @@
             <Label Content="Kontonummer:" HorizontalAlignment="Left" Margin="38,67,0,0" VerticalAlignment="Top"/>
             <Label Content="Verwendungszweck:" HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top"/>
             <Label Content="Betrag:" HorizontalAlignment="Left" Margin="80,129,0,0" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="132,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="382"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="132,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="382"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="132,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="382"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="132,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="382"/>
-            <Button Content="Überweisen" HorizontalAlignment="Left" Height="56" Margin="132,161,0,0" VerticalAlignment="Top" Width="282" FontSize="36"/>
+            <TextBox x:Name="RecipientNameBox"  HorizontalAlignment="Left" Height="23" Margin="132,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="382"/>
+            <TextBox x:Name="RecipientIdBox" HorizontalAlignment="Left" Height="23" Margin="132,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="382"/>
+            <TextBox x:Name="PurposeBox" HorizontalAlignment="Left" Height="23" Margin="132,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="382"/>
+            <TextBox x:Name="TransactionAmountBox" HorizontalAlignment="Left" Height="23" Margin="132,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="382"/>
+            <Button x:Name="TransactionActionButton" Content="Überweisen" Click="TransactionActionButton_Click" HorizontalAlignment="Left" Height="56" Margin="132,161,0,0" VerticalAlignment="Top" Width="282" FontSize="36"/>
         </Grid>
-        <Grid x:Name="BalanceGrid" Margin="0,0,0,120" Visibility="Visible">
+        <Grid x:Name="BalanceGrid" Margin="0,0,0,120" Visibility="Collapsed">
             <Label Content="Ihr aktueller Kontostand beträgt:" HorizontalAlignment="Left" Margin="302,46,0,0" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="166,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="434" IsReadOnly="True" TextAlignment="Right"/>
+            <TextBox x:Name="BalanceBox" HorizontalAlignment="Left" Height="23" Margin="166,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="434" IsReadOnly="True" TextAlignment="Right"/>
             <Label Content="€" HorizontalAlignment="Left" Margin="605,90,0,0" VerticalAlignment="Top"/>
         </Grid>
-        <Grid x:Name="BackGrid" Height="120" VerticalAlignment="Bottom">
-            <Button Content="Zurück" Margin="233,10,233,0" Click="Button_Click_2" FontSize="48" Height="80" VerticalAlignment="Top"/>
+        <Grid x:Name="BackGrid" Height="120" VerticalAlignment="Bottom" Visibility="Collapsed">
+            <Button x:Name="BackButton" Content="Zurück" Margin="233,10,233,0" Click="BackButton_Click" FontSize="48" Height="80" VerticalAlignment="Top"/>
         </Grid>
     </Grid>
 

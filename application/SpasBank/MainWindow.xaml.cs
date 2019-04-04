@@ -25,24 +25,62 @@ namespace SpasBank
             InitializeComponent();
         }
 
-        
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Back_Button_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void DepositMenuButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void WithdrawMenuButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TransactionMenuButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void WithdrawActionButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DepositActionButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TransactionActionButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BalanceMenuButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
