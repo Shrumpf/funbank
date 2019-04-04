@@ -1,0 +1,1 @@
+## Schnittstelle zwischen Webanwendung, Desktopanwendung und Datenbank
