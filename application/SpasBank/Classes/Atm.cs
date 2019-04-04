@@ -10,7 +10,8 @@ namespace SpasBank.Classes
     public static class Atm
     {
         static double[] values = { 500, 200, 100, 50, 20, 10, 5 /*, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01 */};
-        static int[] currentMoney = new int[15];
+        static int[] currentMoney = new int[values.Length];
+        static int atmId = 1;
 
         public static int[] GimmeDaMoneh(int amount)
         {
@@ -35,17 +36,34 @@ namespace SpasBank.Classes
             return moneyOut;
         }
 
-        public static bool checkPossible(int amount)
+        public static void Deposit(int[] amount)
         {
+            //ToDo Use FloApi to get current Money
+            for (int i = 0; i < currentMoney.Length; i++)
+            {
+                currentMoney[i] += amount[i];
+            }
+            //ToDo use FloApi to update database
+        }
+
+        public static void PerformTransaction()
+        {
+            //ToDo use FloApi to perform a transaction
+        }
+
+        private static bool checkPossible(int amount)
+        {
+            //ToDo Use FloApi to get currentMoney
             if (amount <= currentMoney.Sum())
                 return true;
             else
                 return false;
         }
 
-        public static void printTransactions(int accountID)
+        private static void sendErrorCode()
         {
-            //TransactionPartner HFE    URH ")Use   Date   Amount
+            var error = new Random().Next(0, 9999);
+            //ToDo Use flo Api to send error
         }
     }
 }
