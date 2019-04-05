@@ -3495,6 +3495,10 @@ input, select, textarea {
 				color: #008080;
 			}
 
+			#menu ul a.active {
+				color: #008080;
+			}
+
 			#menu ul a.opener, #menu ul span.opener {
 				-moz-transition: color 0.2s ease-in-out;
 				-webkit-transition: color 0.2s ease-in-out;
