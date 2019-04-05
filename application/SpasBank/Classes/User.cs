@@ -22,39 +22,5 @@ namespace SpasBank.Classes
             accountId = id;
             Password = pass;
         }
-
-        public int[] Withdraw(int amount)
-        {
-            int[] bills = Atm.GimmeDaMoneh(amount);
-            if (bills == null)
-            {
-                return null;
-            }
-            if (amount <= Balance)
-            {
-                UpdateBalance(amount * -1);
-            }
-            return null;
-        }
-
-        public void Deposit(int[] amounts)
-        {
-            var sum = amounts.Sum();
-            Atm.Deposit(amounts);
-            UpdateBalance(sum);
-        }
-
-        private bool UpdateBalance(double amount)
-        {
-            //ToDo: use FloApi to update balance
-            return false;
-        }
-
-        private double GetBalance()
-        {
-            double balance = 0;
-            //ToDo: Use FloApi to getbalance for account
-            return balance;
-        }
     }
 }
