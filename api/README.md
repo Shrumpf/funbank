@@ -1,5 +1,7 @@
 ## Schnittstelle zwischen Webanwendung, Desktopanwendung und Datenbank
 
+#### Common
+- [x] account login, auth, token
 
 #### Frontend
 - [ ] Login
@@ -12,7 +14,7 @@
 
 - [ ] get atm where atm Id
 - [ ] put atm update bills where atm Id
-- [ ] get accounts where Id
-- [ ] put accounts update balance where Id
+- [x] get accounts where Id
+- [x] post accounts update balance where Id
 - [ ] post errorcode_atm insert errorcode atm
 - [ ] post transfer

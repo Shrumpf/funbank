@@ -6,7 +6,7 @@ const routes = require('./routes');
 const humans = require('./routes/human');
 const accounts = require('./routes/accounts');
 
-var mysql = require("mysql");
+var mysql = require("mysql2");
 var bodyParser = require("body-parser");
 var connection = mysql.createConnection({
   host: process.env.MYSQL_HOST,
@@ -25,6 +25,8 @@ app.use(bodyParser.json());
 
 app.get('/v1/health', routes.health);
 
+app.post('/v1/accounts/login', accounts.login);
+app.post('/v1/accounts/token', accounts.getToken);
 app.get('/v1/accounts/:id/getBalance', accounts.getBalance);
 app.post('/v1/accounts/setBalance', accounts.setBalance);
 
