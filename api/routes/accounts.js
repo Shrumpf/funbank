@@ -1,5 +1,3 @@
-var auth = require("../modules/auth");
-
 function getRandomInt() {
   min = Math.ceil();
   max = Math.floor(999999999999999);

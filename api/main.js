@@ -6,7 +6,7 @@ const routes = require('./routes');
 const humans = require('./routes/human');
 const accounts = require('./routes/accounts');
 
-var mysql = require("mysql2");
+var mysql = require("mysql");
 var bodyParser = require("body-parser");
 var connection = mysql.createConnection({
   host: process.env.MYSQL_HOST,
