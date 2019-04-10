@@ -1,3 +1,5 @@
+const auth = require('./auth');
+
 function getRandomInt() {
   min = Math.ceil();
   max = Math.floor(999999999999999);
@@ -7,103 +9,93 @@ function getRandomInt() {
   );
 }
 
-exports.login = function(req, res) {
+exports.login = async function (req, res) {
   const accountId = parseInt(req.body.id);
   const password = req.body.password;
 
   const token = "fb" + getRandomInt();
 
   let sql = `UPDATE accounts SET token = ? WHERE id = ? AND pass = ?`;
-
-  db.query(sql, [token, accountId, password], (err, result) => {
-    if (err) {
-      console.error(err);
-    } else {
-      if (result && result.affectedRows > 0) {
-        res.status(200).send({ token });
-      }
-      console.log(result);
+  try {
+    let [result] = await db.query(sql, [token, accountId, password]);
+    if (result && result.affectedRows > 0) {
+      res.status(200).send({ token });
+      console.log(`${accountId} logged in`)
     }
-  });
+  }
+  catch (error) {
+    res.status(500).send();
+  }
 };
 
-exports.getToken = function(req, res) {
+exports.getToken = async function (req, res) {
   const accountId = parseInt(req.body.id);
   const password = req.body.password;
 
   let sql = `SELECT token FROM accounts WHERE id = ? AND pass = ?`;
-
-  db.query(sql, [accountId, password], (err, result) => {
-    if (err) {
-      console.error(err);
-    } else {
-      if (result && result.length > 0) {
-        res.status(200).send(result[0]);
-      }
+  try {
+    let [result] = await db.query(sql, [accountId, password]);
+    if (result && result.length > 0) {
+      res.status(200).send(result[0]);
+      console.log(`${accountId} requested his token.`)
     }
-  });
+    else {
+      res.status(403).send();
+    }
+  }
+  catch (error) {
+    res.status(500).send();
+  }
 };
 
-exports.getBalance = async function(req, res) {
+function getToken(bearerToken) {
+  if (bearerToken.startsWith('Bearer ')) {
+    // Remove Bearer from string
+    bearerToken = bearerToken.slice(7, bearerToken.length);
+  }
+
+  return bearerToken;
+}
+
+exports.getBalance = async function (req, res) {
   const accountId = parseInt(req.params.id);
-  const auth = req.body.auth;
+  const token = getToken(req.headers['x-access-token'] || req.headers['authorization']);
+  const isAuthenticated = await auth.isAccount(token);
 
-  let sql = `SELECT token FROM accounts WHERE id = ?`;
-
-  db.query(sql, [accountId], (err, result) => {
-    if (err) {
-      console.error(err);
-    } else {
-      let token = result[0] ? result[0].token : undefined;
-      if ((!token && !auth) || auth !== token) {
-        res.status(403).send();
-        return;
-      } else {
-        let sql = `SELECT balance FROM accounts WHERE id = ${accountId}`;
-        db.query(sql, (err, result) => {
-          if (err) {
-            console.error(err);
-          } else {
-            res.send(result);
-          }
-        });
-      }
+  if (isAuthenticated) {
+    let sql = `SELECT balance FROM accounts WHERE id = ? AND token = ?`;
+    try {
+      const [result] = await db.query(sql, [accountId, token]);
+      res.send(result[0]);
+      console.log(`${accountId} requested his balance.`)
     }
-  });
+    catch (error) {
+      res.status(500).send();
+    }
+  }
+  else {
+    res.status(403).send();
+  }
 };
 
-exports.setBalance = function(req, res) {
-  const accountId = parseInt(req.body.accountId);
-  const balance = parseFloat(req.body.balance);
-  const auth = req.body.auth;
+exports.setBalance = async function (req, res) {
+  const accountId = parseInt(req.params.id);
+  const token = getToken(req.headers['x-access-token'] || req.headers['authorization']);
+  const isAuthenticated = await auth.isAccount(token);
+  const balance = parseInt(req.body.balance);
 
-  if (!accountId || accountId === null) {
-    res.status(500).send();
-  }
-
-  if (!balance || balance === null) {
-    res.status(500).send();
-  }
-  let sql = `SELECT token FROM accounts WHERE id = ?`;
-
-  db.query(sql, [accountId], (err, result) => {
-    if (err) {
-      console.error(err);
-    } else {
-      let token = result[0] ? result[0].token : undefined;
-      if ((!token && !auth) || auth !== token) {
-        res.status(403).send();
-        return;
-      } else {
-        var sql = `UPDATE accounts SET balance = ? WHERE id = ?`;
-        db.query(sql, [balance, accountId], (err, result) => {
-          if (err) {
-            console.error(err);
-          } else {
-            res.status(200).send();
-          }
-        });
-      }
+  if (isAuthenticated) {
+    let sql = `UPDATE accounts SET balance = ? WHERE id = ? AND token = ?`;
+    try {
+      const [result] = await db.query(sql, [balance, accountId, token]);
+      res.status(200).send();
+      console.log(`balance from Account: ${accountId} set to ${balance}`);
     }
-  });
+    catch (error) {
+      res.status(500).send();
+    }
+  }
+  else {
+    res.status(403).send();
+  }
 };
