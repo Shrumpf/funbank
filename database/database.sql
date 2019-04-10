@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS atm (
     ten smallint(3),
     five smallint(3),
     zip varchar(5) NOT NULL,
+    token varchar(255) NOT NULL,
     PRIMARY KEY(id)
 );
 
@@ -58,6 +59,6 @@ CREATE TABLE IF NOT EXISTS transfers(
     amount DOUBLE(10, 2) NOT NULL,
     transferDate datetime DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
-    FOREIGN KEY (sender) REFERENCES humans(id),
-    FOREIGN KEY (reciever) REFERENCES humans(id)
+    FOREIGN KEY (sender) REFERENCES accounts(id),
+    FOREIGN KEY (reciever) REFERENCES accounts(id)
 );

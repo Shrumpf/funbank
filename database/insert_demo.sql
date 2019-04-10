@@ -9,5 +9,5 @@ WHERE humans.id = LAST_INSERT_ID();
 INSERT INTO humans (pass, name, firstname, rights)
 VALUES ('12345', 'Doe', 'Employee', 1);
 
-INSERT INTO atm (fivehundred, twohundred, onehundred, fifty, twenty, ten, five, zip)
-VALUES (10, 20, 40, 80, 100, 120, 150, '07747');
+INSERT INTO atm (fivehundred, twohundred, onehundred, fifty, twenty, ten, five, zip, token)
+VALUES (10, 20, 40, 80, 100, 120, 150, '07747', 'atm01');
