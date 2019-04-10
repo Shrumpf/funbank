@@ -51,7 +51,7 @@ namespace SpasBank
 
         private void WithdrawMenuButton_Click(object sender, RoutedEventArgs e)
         {
-            WindowLogic.SetView(ViewEnum.Transaction, ViewEnum.MainMenu);
+            WindowLogic.SetView(ViewEnum.Withdraw, ViewEnum.MainMenu);
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -76,22 +76,34 @@ namespace SpasBank
 
         private void WithdrawActionButton_Click(object sender, RoutedEventArgs e)
         {
-            //ToDo
+            WindowLogic.Withdraw(WithdrawAmountBox.Text);
         }
 
         private void DepositActionButton_Click(object sender, RoutedEventArgs e)
         {
-            //ToDo
+            WindowLogic.Deposit(new string[] {
+                FiveHundredBox.Text,
+                TwoHundredBox.Text,
+                OneHundredBox.Text,
+                FiftyBox.Text,
+                TwentyBox.Text,
+                TenBox.Text,
+                FiveBox.Text});
         }
 
         private void TransactionActionButton_Click(object sender, RoutedEventArgs e)
         {
-            //ToDo
+            WindowLogic.ExecuteTransaction(
+                RecipientNameBox.Text,
+                int.Parse(RecipientIdBox.Text),
+                PurposeBox.Text,
+                double.Parse(TransactionAmountBox.Text));
         }
 
         private void BalanceMenuButton_Click(object sender, RoutedEventArgs e)
         {
-            WindowLogic.SetView(ViewEnum.Balance, ViewEnum.MainMenu);
+            BalanceBox.Text = WindowLogic.GetBalance().ToString();
+            WindowLogic.SetView(ViewEnum.Balance, ViewEnum.MainMenu); 
         }
     }
 }

@@ -74,7 +74,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Classes\Atm.cs" />
+    <Compile Include="Classes\JsonClasses\AtmContainer.cs" />
     <Compile Include="Classes\JsonClasses\BalanceContainer.cs" />
+    <Compile Include="Classes\JsonClasses\Toke.cs" />
     <Compile Include="Classes\JsonClasses\TransferContainer.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -108,7 +110,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

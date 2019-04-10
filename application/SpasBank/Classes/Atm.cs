@@ -10,14 +10,16 @@ namespace SpasBank.Classes
     public static class Atm
     {
         static double[] values = { 500, 200, 100, 50, 20, 10, 5 /*, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01 */};
-        static int[] currentMoney = new int[values.Length];
-        static int atmId = 1;
+        public static int[] CurrentMoney = new int[values.Length];
+        public static readonly int atmId = 1;
+       public static string zip { get; set; }
 
         public static int[] GimmeDaMoneh(int amount)
         {
             if (!checkPossible(amount))
             {
-                return null;
+                //ToDo: WriteErrorLog
+                throw new AtmEmptyException();
             }
 
             int[] moneyOut = new int[15];
@@ -25,36 +27,42 @@ namespace SpasBank.Classes
 
             while (amount > 0)
             {
-                moneyOut[currentValueIndex] = Math.Max(currentMoney[currentValueIndex],
-                    currentMoney[currentValueIndex] - (int)(amount / values[currentValueIndex]));
+                moneyOut[currentValueIndex] = Math.Max(CurrentMoney[currentValueIndex],
+                    CurrentMoney[currentValueIndex] - (int)(amount / values[currentValueIndex]));
 
                 amount -= (int)(moneyOut[currentValueIndex] * values[currentValueIndex]);
-                currentMoney[currentValueIndex] -= moneyOut[currentValueIndex];
+                CurrentMoney[currentValueIndex] -= moneyOut[currentValueIndex];
                 currentValueIndex++;
             }
 
             return moneyOut;
         }
 
-        public static void Deposit(int[] amount)
+        public static int Deposit(string[] amountsString)
         {
-            //ToDo Use FloApi to get current Money
-            for (int i = 0; i < currentMoney.Length; i++)
+            int sum = 0;
+            var amounts = new int[amountsString.Length];
+            for (int i = 0; i < amountsString.Length; i++)
             {
-                currentMoney[i] += amount[i];
+                int amount;
+                if (int.TryParse(amountsString[i], out amount))
+                {
+                    amounts[i] = amount;
+                }
+                else
+                {
+                    amounts[i] = 0;
+                }
+                sum += amounts[i] * (int)values[i];
+                CurrentMoney[i] += amounts[i];
             }
-            //ToDo use FloApi to update database
-        }
-
-        public static void PerformTransaction()
-        {
-            //ToDo use FloApi to perform a transaction
+            return sum;
         }
 
         private static bool checkPossible(int amount)
         {
             //ToDo Use FloApi to get currentMoney
-            if (amount <= currentMoney.Sum())
+            if (amount <= CurrentMoney.Sum())
                 return true;
             else
                 return false;
@@ -65,5 +73,9 @@ namespace SpasBank.Classes
             var error = new Random().Next(0, 9999);
             //ToDo Use flo Api to send error
         }
+    }
+    public class AtmEmptyException : Exception
+    {
+
     }
 }

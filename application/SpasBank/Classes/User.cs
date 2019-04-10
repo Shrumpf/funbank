@@ -14,9 +14,9 @@ namespace SpasBank.Classes
     public class User
     {
         public readonly string Password;
-        public readonly double Balance;
+        public double Balance { get; set; }
         public readonly int accountId;
-        public int Token { get; set; }
+        public string Token { get; set; }
 
         public User(int id, string pass)
         {

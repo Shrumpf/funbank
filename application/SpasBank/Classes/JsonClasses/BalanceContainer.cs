@@ -11,6 +11,6 @@ namespace SpasBank.Classes.JsonClasses
     public class Balance
     {
         [JsonProperty]
-        public int balance { get; set; }
+        public double balance { get; set; }
     }
 }

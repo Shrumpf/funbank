@@ -11,6 +11,6 @@ namespace SpasBank.Classes.JsonClasses
     public class Token
     {
         [JsonProperty]
-        public int token { get; set; }
+        public string token { get; set; }
     }
 }
