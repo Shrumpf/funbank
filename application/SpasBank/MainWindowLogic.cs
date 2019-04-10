@@ -100,8 +100,9 @@ namespace SpasBank
             int.TryParse(accountId, out intId);
 
             var url = baseUrl + "accounts/login";
-            var content = new StringContent("{\"id\": " + accountId + " \"password\": " + password + "}");
-            var response = PutIt(url, content);
+            var content = new StringContent("{\"id\": " + accountId + ", \"password\": " + password + "}", Encoding.UTF8, "application/json");
+            httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            var response = httpClient.PostAsync(url, content).GetAwaiter().GetResult();
 
 
             if (response.IsSuccessStatusCode)
@@ -125,69 +126,148 @@ namespace SpasBank
             }
         }
 
-        public void ExecuteTransaction(string recipientName, int recipientId, string purpose, int amount)
+        public void ExecuteTransaction(string recipientName, int recipientId, string purpose, double amount)
         {
             //http://api.funbank.vossflorian.de/v1/{accounts/id,accounts/login, accounts/token, get(id im slash oben), set}
             var url = baseUrl + "accounts/transfer";
             var content = new StringContent("{\"sender\": " + ActiveAccount.accountId + "," +
                 " \"reciever\": " + recipientId + ", " +
-                "\"amount\": " + amount + "}");
+                "\"amount\": " + amount + "}", Encoding.UTF8, "application/json");
         }
 
-        public int[] Withdraw(int amount)
+        public int[] Withdraw(string amountString)
         {
-            var balance = GetBalance();
-            int[] bills = Atm.GimmeDaMoneh(amount);
-            if (bills == null)
+            try
             {
-                return null;
+                var amount = int.Parse(amountString);
+                var balance = GetBalance();
+                GetAtmBalance();
+                int[] bills = Atm.GimmeDaMoneh(amount);
+                if (bills == null)
+                {
+                    throw new Exception();
+                }
+                if (amount <= balance)
+                {
+                    UpdateBalance(amount * -1);
+                    UpdateAtmBalance();
+                }
+                return bills;
             }
-            if (amount <= balance)
+            catch (AtmEmptyException e)
             {
-                UpdateBalance(amount * -1);
+                SendErrorCode(1);
+                return new int[] { 0, 0, 0, 0, 0, 0, 0 };
             }
-            return bills;
+            catch (Exception e)
+            {
+                var code = new Random().Next(2, 999);
+                SendErrorCode(code);
+                return new int[] { 0, 0, 0, 0, 0, 0, 0 };
+            }
         }
 
-        public void Deposit(int[] amounts)
+        public void Deposit(string[] amountsString)
         {
-            var sum = amounts.Sum();
-            Atm.Deposit(amounts);
-            UpdateBalance(sum);
+            try
+            {
+                var balance = GetBalance();
+                GetAtmBalance();
+                var sum = balance + Atm.Deposit(amountsString);
+                UpdateBalance(sum);
+                UpdateAtmBalance();
+            }
+            catch (Exception e)
+            {
+                var code = new Random().Next(2, 999);
+                SendErrorCode(code);
+            }
+        }
+
+        public void GetAtmBalance()
+        {
+            try
+            {
+                var url = baseUrl + "atm/" + Atm.atmId;
+                var jsonString = httpClient.GetAsync(url).GetAwaiter().GetResult()
+                    .Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                var atmContainer = JsonConvert.DeserializeObject<AtmContainer>(jsonString);
+                Atm.CurrentMoney = atmContainer.bills;
+            }
+            catch (Exception e)
+            {
+                var code = new Random().Next(2, 999);
+                SendErrorCode(code);
+            }
+        }
+
+        public void UpdateAtmBalance()
+        {
+            try
+            {
+                var url = baseUrl + "atm/" + Atm.atmId;
+                var container = new AtmContainer();
+                container.id = Atm.atmId;
+                container.zip = Atm.zip;
+                container.bills = Atm.CurrentMoney;
+                var jsonString = JsonConvert.SerializeObject(container);
+                var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+                PutIt(url, content);
+            }
+            catch (Exception e)
+            {
+                var code = new Random().Next(2, 999);
+                SendErrorCode(code);
+            }
         }
 
         private void UpdateBalance(double amount)
         {
-            var url = baseUrl + $"accounts/{ActiveAccount.accountId}/setBalance";
-            var content = new StringContent(
-                "{\"auth:\" " + ActiveAccount.Token + ", " +
-                "\"balance\": " + ActiveAccount.Balance + "}");
-            var response = httpClient.PutAsync(url, content);
+            try
+            {
+                ActiveAccount.Balance = amount;
+                var url = baseUrl + $"accounts/{ActiveAccount.accountId}/setBalance";
+                var content = new StringContent(
+                    "{\"balance\": " + ActiveAccount.Balance +"}", Encoding.UTF8, "application/json");
+                var response = httpClient.PutAsync(url, content).GetAwaiter().GetResult();
+            }
+            catch (Exception e)
+            {
+                var code = new Random().Next(2, 999);
+                SendErrorCode(code);
+            }
         }
 
-        //private void SendErrorCode(int error)
-        //{
-        //    StreamWriter writer = new StreamWriter("InternalLog.txt");
-        //    writer.Write(writer.NewLine+error);
-        //    writer.Close();
-        //    var url = baseUrl + $"atm/addErrorCode";
-        //    var content = new StringContent("{error: "+error+"}");
-        //    var response = PutIt(url, content);
-        //}
-
-        private double GetBalance()
+        private void SendErrorCode(int error)
         {
-            double balance = 0;
+            StreamWriter writer = new StreamWriter("InternalLog.txt");
+            writer.Write(writer.NewLine + error);
+            writer.Close();
+            var url = baseUrl + $"atm/" + Atm.atmId + "/addErrorCode";
+            var content = new StringContent("{error: " + error + "}");
+            var response = PutIt(url, content);
+        }
+
+        public double GetBalance()
+        {
             var url = baseUrl + $"accounts/{ActiveAccount.accountId}/getBalance";
-            var content = new StringContent("{auth: " + ActiveAccount.Token + "}");
-            httpClient.GetAsync(url).GetAwaiter().GetResult();
-            return balance;
+            var jsonString = httpClient.GetAsync(url).GetAwaiter().GetResult()
+                .Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            var balance = JsonConvert.DeserializeObject<Balance>(jsonString);
+            return balance.balance;
         }
 
         private HttpResponseMessage PutIt(string url, StringContent content)
         {
-            var response = httpClient.PutAsync(url, content).GetAwaiter().GetResult();
-            return response;
+            try
+            {
+                var response = httpClient.PutAsync(url, content).GetAwaiter().GetResult();
+                return response;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
     }
 
