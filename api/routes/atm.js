@@ -76,7 +76,13 @@ exports.getAtmById = async function (req, res) {
 exports.setBills = async function (req, res) {
     const atmId = parseInt(req.params.id);
     const token = getToken(req.headers['x-access-token'] || req.headers['authorization']);
-    const isAuthenticated = await auth.isAtm(atmId, token);
+    let isAuthenticated;
+    if (token.startsWith('fb')) {
+        isAuthenticated = await auth.isAccount(token);
+    }
+    else {
+        isAuthenticated = await auth.isAtm(atmId, token);
+    }
 
     const b = req.body;
 
@@ -84,14 +90,22 @@ exports.setBills = async function (req, res) {
         let sql = `UPDATE atm SET fivehundred = ?, twohundred = ?, onehundred = ?, fifty = ?, twenty = ?, ten = ?, five = ? WHERE id = ?`;
         try {
             const [result] = await db.query(sql, [b.fivehundred, b.twohundred, b.onehundred, b.fifty, b.twenty, b.ten, b.five, atmId, token]);
-            res.status(200).send();
-            console.log(`set bills from atm: ${atmId} set to ${b}`);
+            if (result.affectedRows > 0) {
+                res.status(200).send();
+                console.log(`set bills from atm: ${atmId} set to ${b}`);
+            }
+            else {
+                res.status(500).send();
+                console.log(`could set bills from atm ${atmId}`);
+            }
         }
         catch (error) {
             res.status(500).send();
+            console.error(error);
         }
     }
     else {
         res.status(403).send();
+        console.warn(`Not authentificated`)
     }
 };
