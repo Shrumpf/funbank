@@ -5,27 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpasBank"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" MinWidth="800" MinHeight="450">
     <Grid Margin="0">
         <Grid x:Name="LoginGrid" HorizontalAlignment="Left" Height="351" Margin="55,27,0,0" VerticalAlignment="Top" Width="687" Visibility="Visible">
             <TextBox x:Name="AccountNumberField" Height="23" Margin="220,86,211,0" TextWrapping="Wrap" VerticalAlignment="Top" PreviewTextInput="IntegerBox_OnPreviewTextInput"/>
             <Label Content="Kontonummer:" HorizontalAlignment="Left" Margin="126,82,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.207,0.423"/>
-            <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Height="44" Margin="232,236,0,0" VerticalAlignment="Top" Width="220" Click="LoginButton_Click" FontSize="24"/>
             <PasswordBox x:Name="PasswordField" HorizontalAlignment="Left" Margin="220,138,0,0" VerticalAlignment="Top" Width="256"/>
+            <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Height="44" Margin="232,236,0,0" VerticalAlignment="Top" Width="220" Click="LoginButton_Click" FontSize="24"/>
             <Label Content="Passwort:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="155,134,0,0" RenderTransformOrigin="0.632,1.462"/>
             <Label x:Name="LoginFailMessage" Content="Login fehlgeschlagen" HorizontalAlignment="Left" Margin="278,205,0,0" VerticalAlignment="Top" Visibility="Hidden" Foreground="#FFD40A0A"/>
         </Grid>
         <Grid x:Name="MainMenuGrid" Margin="0,0,0,0" Visibility="Collapsed">
-            <Button x:Name="WithdrawMenuButton" Content="Abheben" HorizontalAlignment="Left" Height="70" Margin="61,26,0,0" VerticalAlignment="Top" Width="326" Click="WithdrawMenuButton_Click" FontSize="48"/>
-            <Button x:Name="DepositMenuButton" Content="Einzahlen" HorizontalAlignment="Left" Height="70" Margin="439,26,0,0" VerticalAlignment="Top" Width="326" Click="DepositMenuButton_Click" FontSize="48"/>
-            <Button x:Name="TransactionMenuButton" Content="Überweisung" HorizontalAlignment="Left" Margin="61,138,0,211" Width="326" Click="TransactionMenuButton_Click" FontSize="48"/>
-            <Button x:Name="LogoutButton" Content="Abmelden" HorizontalAlignment="Left" Margin="239,317,0,32" Width="326" Click="LogoutButton_Click" FontSize="48"/>
-            <Button x:Name="BalanceMenuButton" Content="Kontostand" HorizontalAlignment="Left" Margin="439,138,0,211" Width="326" Click="BalanceMenuButton_Click" FontSize="48"/>
+            <Button x:Name="WithdrawMenuButton" Content="Abheben" Height="70" Margin="61,26,0,0" VerticalAlignment="Top" Click="WithdrawMenuButton_Click" FontSize="48" HorizontalAlignment="Left" Width="326"/>
+            <Button x:Name="DepositMenuButton" Content="Einzahlen" Height="70" Margin="0,26,27,0" VerticalAlignment="Top" Click="DepositMenuButton_Click" FontSize="48" HorizontalAlignment="Right" Width="326"/>
+            <Button x:Name="TransactionMenuButton" Content="Überweisung" HorizontalAlignment="Left" Margin="61,138,0,0" Width="326" Click="TransactionMenuButton_Click" FontSize="48" Height="70" VerticalAlignment="Top"/>
+            <Button x:Name="LogoutButton" Content="Abmelden" Margin="239,0,227,32" Click="LogoutButton_Click" FontSize="48" Height="70" VerticalAlignment="Bottom"/>
+            <Button x:Name="BalanceMenuButton" Content="Kontostand" Margin="0,138,27,0" Click="BalanceMenuButton_Click" FontSize="48" Height="70" VerticalAlignment="Top" HorizontalAlignment="Right" Width="326"/>
+            <Label x:Name="MainMenuSuccessLabel" Content="Aktion Erfolgreich!" HorizontalAlignment="Left" Height="30" Margin="322,235,0,0" VerticalAlignment="Top" Width="208" FontSize="16" Visibility="Hidden"/>
+            <Label x:Name="MainMenuFailedLabel" Content="Aktion Fehlgeschlagen!" HorizontalAlignment="Left" Height="30" Margin="322,235,0,0" VerticalAlignment="Top" Width="208" FontSize="16" Visibility="Hidden"/>
         </Grid>
         <Grid x:Name="WithdrawGrid" Margin="0,0,0,120" Visibility="Collapsed">
             <TextBox x:Name="WithdrawAmountBox" Height="54" Margin="239,60,227,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36" PreviewTextInput="IntegerBox_OnPreviewTextInput"/>
             <Label Content="Menge:" Margin="110,56,553,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,-0.154" FontSize="36"/>
             <Button x:Name="WithdrawActionButton" Content="Abheben" Margin="239,137,227,0" Click="WithdrawActionButton_Click" FontSize="48" Height="80" VerticalAlignment="Top"/>
+            <Label x:Name="TakeMoneyLabel" Content="Bitte entnehmen sie ihr Geld" Height="42" Margin="239,222,227,0" VerticalAlignment="Top" FontSize="18" Visibility="Hidden"/>
+            <Label x:Name="TakeMoneyFailed" Content="Prüfen Sie ihren Kontostand!" Height="42" Margin="239,222,227,0" VerticalAlignment="Top" FontSize="18" Visibility="Hidden"/>
         </Grid>
         <Grid x:Name="DepositGrid" Margin="0,0,0,120" Visibility="Collapsed">
             <Button x:Name="DepositActionButton" Content="Einzahlen" Margin="233,175,233,0" Click="DepositActionButton_Click" FontSize="48" Height="80" VerticalAlignment="Top"/>
@@ -68,6 +72,11 @@
         <Grid x:Name="BackGrid" Height="120" VerticalAlignment="Bottom" Visibility="Collapsed">
             <Button x:Name="BackButton" Content="Zurück" Margin="233,10,233,0" Click="BackButton_Click" FontSize="48" Height="80" VerticalAlignment="Top"/>
         </Grid>
+        <Grid x:Name="WaitingGrid" HorizontalAlignment="Left" Height="351" Margin="55,27,0,0" VerticalAlignment="Top" Width="687" Visibility="Collapsed">
+            <Label Content="         Bitte Warten&#xD;&#xA;Anfrage wird bearbeitet" Height="300" Margin="10,65,10,0" VerticalAlignment="Top" FontSize="72"/>
+        </Grid>
+
     </Grid>
+
 
 </Window>
