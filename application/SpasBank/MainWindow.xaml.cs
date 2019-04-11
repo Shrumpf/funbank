@@ -22,12 +22,14 @@ namespace SpasBank
         public MainWindow()
         {
             WindowLogic = new MainWindowLogic(this);
+            
             InitializeComponent();
+            WindowLogic.SetView(ViewEnum.Login, ViewEnum.None);
         }
 
         Regex IntEx = new Regex(@"^\d*$");
 
-        Regex DoublEx = new Regex(@"^\d*?.\d{0,2}$");
+        Regex DoublEx = new Regex(@"^\d*,?\d{0,2}$");
 
         private void IntegerBox_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
         {

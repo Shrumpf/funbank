@@ -32,6 +32,7 @@ namespace SpasBank
             {
                 case ViewEnum.Login:
                     Main.LoginGrid.Visibility = System.Windows.Visibility.Collapsed;
+                    Main.LoginFailMessage.Visibility = System.Windows.Visibility.Hidden;
                     break;
                 case ViewEnum.Balance:
                     Main.BalanceGrid.Visibility = System.Windows.Visibility.Collapsed;
@@ -41,12 +42,19 @@ namespace SpasBank
                     break;
                 case ViewEnum.MainMenu:
                     Main.MainMenuGrid.Visibility = System.Windows.Visibility.Collapsed;
+                    Main.MainMenuSuccessLabel.Visibility = System.Windows.Visibility.Hidden;
+                    Main.MainMenuFailedLabel.Visibility = System.Windows.Visibility.Hidden;
                     break;
                 case ViewEnum.Transaction:
                     Main.TransactionGrid.Visibility = System.Windows.Visibility.Collapsed;
                     break;
                 case ViewEnum.Withdraw:
                     Main.WithdrawGrid.Visibility = System.Windows.Visibility.Collapsed;
+                    Main.TakeMoneyLabel.Visibility = System.Windows.Visibility.Hidden;
+                    Main.TakeMoneyFailed.Visibility = System.Windows.Visibility.Hidden;
+                    break;
+                case ViewEnum.Waiting:
+                    Main.WaitingGrid.Visibility = System.Windows.Visibility.Collapsed;
                     break;
                 default:
                     Main.LoginGrid.Visibility = System.Windows.Visibility.Collapsed;
@@ -55,6 +63,7 @@ namespace SpasBank
                     Main.MainMenuGrid.Visibility = System.Windows.Visibility.Collapsed;
                     Main.TransactionGrid.Visibility = System.Windows.Visibility.Collapsed;
                     Main.WithdrawGrid.Visibility = System.Windows.Visibility.Collapsed;
+                    Main.WaitingGrid.Visibility = System.Windows.Visibility.Collapsed;
                     break;
 
             }
@@ -86,6 +95,9 @@ namespace SpasBank
                 case ViewEnum.Withdraw:
                     Main.WithdrawGrid.Visibility = System.Windows.Visibility.Visible;
                     break;
+                case ViewEnum.Waiting:
+                    Main.WaitingGrid.Visibility = System.Windows.Visibility.Visible;
+                    break;
                 default:
                     //ToDo Logout user when this happens.
                     Main.LoginGrid.Visibility = System.Windows.Visibility.Visible;
@@ -96,72 +108,110 @@ namespace SpasBank
         public void Authenticate(string accountId, string password)
         {
             Main.LoginFailMessage.Visibility = System.Windows.Visibility.Hidden;
-            int intId;
-            int.TryParse(accountId, out intId);
-
-            var url = baseUrl + "accounts/login";
-            var content = new StringContent("{\"id\": " + accountId + ", \"password\": " + password + "}", Encoding.UTF8, "application/json");
-            httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            var response = httpClient.PostAsync(url, content).GetAwaiter().GetResult();
-
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                ActiveAccount = new User(intId, password);
+                int intId;
+                int.TryParse(accountId, out intId);
 
-                var jsonObj = JsonConvert.DeserializeObject<Token>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
-                ActiveAccount.Token = jsonObj.token;
+                var url = baseUrl + "accounts/login";
+                var content = new StringContent("{\"id\": " + accountId + ", \"password\": " + password + "}", Encoding.UTF8, "application/json");
+                httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                var response = httpClient.PostAsync(url, content).GetAwaiter().GetResult();
 
-                httpClient.DefaultRequestHeaders.Authorization =
-                new System.Net.Http.Headers.AuthenticationHeaderValue(
-                    "Bearer",
-                    ActiveAccount.Token.ToString());
 
-                SetView(ViewEnum.MainMenu, ViewEnum.Login);
+                if (response.IsSuccessStatusCode)
+                {
+                    ActiveAccount = new User(intId, password);
+
+                    var jsonObj = JsonConvert.DeserializeObject<Token>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+                    ActiveAccount.Token = jsonObj.token;
+
+                    httpClient.DefaultRequestHeaders.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue(
+                        "Bearer",
+                        ActiveAccount.Token.ToString());
+
+                    SetView(ViewEnum.MainMenu, ViewEnum.Login);
+                }
+
+                else
+                {
+                    Main.LoginFailMessage.Visibility = System.Windows.Visibility.Visible;
+                }
             }
-
-            else
-            {
-                Main.LoginFailMessage.Visibility = System.Windows.Visibility.Visible;
-            }
+            catch (Exception e) { }
         }
 
         public void ExecuteTransaction(string recipientName, int recipientId, string purpose, double amount)
         {
-            //http://api.funbank.vossflorian.de/v1/{accounts/id,accounts/login, accounts/token, get(id im slash oben), set}
-            var url = baseUrl + "accounts/transfer";
-            var content = new StringContent("{\"sender\": " + ActiveAccount.accountId + "," +
-                " \"reciever\": " + recipientId + ", " +
-                "\"amount\": " + amount + "}", Encoding.UTF8, "application/json");
+            try
+            {
+                var url = baseUrl + "accounts/transfer";
+                var content = new StringContent("{\"sender\": " + ActiveAccount.accountId + "," +
+                    " \"reciever\": " + recipientId + ", " +
+                    "\"amount\": " + amount + "}", Encoding.UTF8, "application/json");
+
+                 var res = httpClient.PostAsync(url, content).GetAwaiter().GetResult();
+                if (res.IsSuccessStatusCode)
+                {
+                    Main.MainMenuSuccessLabel.Visibility = System.Windows.Visibility.Visible;
+                    SetView(ViewEnum.MainMenu, ViewEnum.Transaction);
+                }
+                else
+                {
+                    Main.MainMenuFailedLabel.Visibility = System.Windows.Visibility.Visible;
+                    SetView(ViewEnum.MainMenu, ViewEnum.Transaction);
+                }
+            }
+            catch (Exception e)
+            {
+                Main.MainMenuFailedLabel.Visibility = System.Windows.Visibility.Visible;
+                SetView(ViewEnum.MainMenu, ViewEnum.Transaction);
+
+            }
         }
 
         public int[] Withdraw(string amountString)
         {
             try
             {
+                Main.TakeMoneyFailed.Visibility = System.Windows.Visibility.Hidden;
+                Main.TakeMoneyLabel.Visibility = System.Windows.Visibility.Hidden;
                 var amount = int.Parse(amountString);
                 var balance = GetBalance();
                 GetAtmBalance();
                 int[] bills = Atm.GimmeDaMoneh(amount);
+                amount = Atm.GetValueOfBills(bills);
                 if (bills == null)
                 {
                     throw new Exception();
                 }
+
                 if (amount <= balance)
                 {
-                    UpdateBalance(amount * -1);
+                    UpdateBalance(balance - amount);
                     UpdateAtmBalance();
+                    Main.TakeMoneyLabel.Visibility = System.Windows.Visibility.Visible;
+                    Main.WithdrawAmountBox.Text = amount.ToString();
                 }
+                else
+                {
+                    Main.TakeMoneyFailed.Visibility = System.Windows.Visibility.Visible;
+                }
+
                 return bills;
+
             }
             catch (AtmEmptyException e)
             {
                 SendErrorCode(1);
+                Main.TakeMoneyLabel.Visibility = System.Windows.Visibility.Hidden;
                 return new int[] { 0, 0, 0, 0, 0, 0, 0 };
             }
             catch (Exception e)
             {
                 var code = new Random().Next(2, 999);
+                Main.TakeMoneyLabel.Visibility = System.Windows.Visibility.Hidden;
                 SendErrorCode(code);
                 return new int[] { 0, 0, 0, 0, 0, 0, 0 };
             }
@@ -176,9 +226,13 @@ namespace SpasBank
                 var sum = balance + Atm.Deposit(amountsString);
                 UpdateBalance(sum);
                 UpdateAtmBalance();
+                Main.MainMenuSuccessLabel.Visibility = System.Windows.Visibility.Visible;
+                SetView(ViewEnum.MainMenu, ViewEnum.Deposit);
             }
             catch (Exception e)
             {
+                Main.MainMenuFailedLabel.Visibility = System.Windows.Visibility.Visible;
+                SetView(ViewEnum.MainMenu, ViewEnum.Deposit);
                 var code = new Random().Next(2, 999);
                 SendErrorCode(code);
             }
@@ -228,7 +282,7 @@ namespace SpasBank
                 ActiveAccount.Balance = amount;
                 var url = baseUrl + $"accounts/{ActiveAccount.accountId}/setBalance";
                 var content = new StringContent(
-                    "{\"balance\": " + ActiveAccount.Balance +"}", Encoding.UTF8, "application/json");
+                    "{\"balance\": " + ActiveAccount.Balance + "}", Encoding.UTF8, "application/json");
                 var response = httpClient.PutAsync(url, content).GetAwaiter().GetResult();
             }
             catch (Exception e)
@@ -273,13 +327,15 @@ namespace SpasBank
 
     public enum ViewEnum
     {
+        None,
         Back,
         Login,
         MainMenu,
         Deposit,
         Withdraw,
         Transaction,
-        Balance
+        Balance,
+        Waiting,
 
     };
 }

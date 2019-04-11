@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:SpasBank"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <!--<Style TargetType="Grid">
+            <Setter Property="Background" Value="LightBlue"/>
+        </Style>-->
     </Application.Resources>
 </Application>

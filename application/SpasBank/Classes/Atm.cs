@@ -12,30 +12,43 @@ namespace SpasBank.Classes
         static double[] values = { 500, 200, 100, 50, 20, 10, 5 /*, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01 */};
         public static int[] CurrentMoney = new int[values.Length];
         public static readonly int atmId = 1;
-       public static string zip { get; set; }
+        public static string zip { get; set; }
 
         public static int[] GimmeDaMoneh(int amount)
         {
-            if (!checkPossible(amount))
+            //if (!checkPossible(amount))
+            //{
+            //    //ToDo: WriteErrorLog
+            //    throw new AtmEmptyException();
+            //}
+
+            int[] moneyOut = new int[values.Length];
+
+            for (int i = 0; i < values.Length; i++)
             {
-                //ToDo: WriteErrorLog
-                throw new AtmEmptyException();
-            }
+                if(amount >= values[i]&& CurrentMoney[i]!=0)
+                {
+                    //Höchstens so viel wie drin ist 
+                    moneyOut[i] = (Math.Min(CurrentMoney[i],
+                        (int)(amount / values[i])));
 
-            int[] moneyOut = new int[15];
-            int currentValueIndex = 0;
-
-            while (amount > 0)
-            {
-                moneyOut[currentValueIndex] = Math.Max(CurrentMoney[currentValueIndex],
-                    CurrentMoney[currentValueIndex] - (int)(amount / values[currentValueIndex]));
-
-                amount -= (int)(moneyOut[currentValueIndex] * values[currentValueIndex]);
-                CurrentMoney[currentValueIndex] -= moneyOut[currentValueIndex];
-                currentValueIndex++;
+                    amount -= (int)(moneyOut[i] * values[i]);
+                    
+                }
+                CurrentMoney[i] -= moneyOut[i];
             }
 
             return moneyOut;
+        }
+
+        public static int GetValueOfBills(int[] bills)
+        {
+            int sum = 0;
+            for (int i = 0; i < bills.Length; i++)
+            {
+                sum += bills[i] * (int)values[i];
+            }
+            return sum;
         }
 
         public static int Deposit(string[] amountsString)
@@ -61,8 +74,8 @@ namespace SpasBank.Classes
 
         private static bool checkPossible(int amount)
         {
-            //ToDo Use FloApi to get currentMoney
-            if (amount <= CurrentMoney.Sum())
+
+            if (amount <= GetValueOfBills(CurrentMoney))
                 return true;
             else
                 return false;
