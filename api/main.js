@@ -2,6 +2,9 @@ require('dotenv-safe').config({ allowEmptyValues: true });
 const express = require('express');
 const app = express();
 
+const path = require('path');
+
+const cookieParser = require('cookie-parser')
 const bluebird = require('bluebird');
 
 const routes = require('./routes');
@@ -10,8 +13,6 @@ const accounts = require('./routes/accounts');
 const atm = require('./routes/atm');
 
 async function main() {
-
-
   var mysql = require("mysql2/promise");
   var bodyParser = require("body-parser");
   var connection = await mysql.createConnection({
@@ -26,9 +27,42 @@ async function main() {
   connection.connect();
 
   global.db = connection;
-  connection.query
+
+  app.set("views", __dirname + "/views");
+  app.set("view engine", "ejs");
+  app.use(cookieParser())
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
+  app.use(express.static(path.join(__dirname, "public")));
+
+  // ------------------VIEWS------------------- 
+
+  app.get('/', (req, res) => res.render('index'));
+  app.get('/login/', (req, res) => res.render('login', {data: {}}));
+  app.post('/login', (req, res) => {
+    humans.employeeLogin(req, res)
+      .then((result) => {
+        if (result) {
+          res.cookie('token', result[0].token);
+          res.cookie('rights', result[0].rights);
+          res.redirect('/dashboard');
+        }
+        else {
+          res.render('login', {data: {err: 'Not authorized'}})
+        }
+      })
+      .catch((err) => console.error(err));
+  });
+  app.get('/dashboard', (req, res) => {
+    if (req.cookies.token) {
+      res.render('dashboard');
+    }
+    else {
+      res.redirect('/login');
+    }
+  })
+
+  // -----------------API-ROUTES--------------------
 
   app.get('/v1/health', routes.health);
 

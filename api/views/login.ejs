@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Login</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="/css/login.css" />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+  </head>
+  <body>
+    <div class="login">
+      <div class="container">
+        <div class="background">
+          <img src="images/network.jpg" alt="network" />
+        </div>
+        <div class="wrap-login">
+          <form action="/login" method="POST" class="login-form validate-form flex-sb flex-w">
+            <h2>
+              Dashboard Login
+            </h2>
+            <p id="errorBox"><%= data ? data.err : '' %></p>
+            <h4 class="form-label">
+              Mitarbeiternummer
+            </h4>
+            <div
+              class="validate-input"
+              data-validate="Mitarbeiternummer wird benötigt"
+            >
+              <input class="input" type="text" name="id" />
+              <span class="focus-input"></span>
+            </div>
+
+            <h4 class="form-label">
+              Passwort
+            </h4>
+            <div
+              class="wrap-input validate-input"
+              data-validate="Passwort ist benötigt"
+            >
+              <span class="btn-show-pass">
+                <i class="fa fa-eye"></i>
+              </span>
+              <input class="input" type="passwort" name="password" />
+              <span class="focus-input"></span>
+            </div>
+
+            <div class="flex-sb-m">
+              <div class="contact-form-checkbox">
+                <input
+                  class="input-checkbox"
+                  id="ckb1"
+                  type="checkbox"
+                  name="remember-me"
+                />
+                <label for="ckb1">
+                  Passwort merken
+                </label>
+              </div>
+
+              <div>
+                <a href="#">
+                  Passwort vergessen?
+                </a>
+              </div>
+            </div>
+
+            <div class="container-login-form-btn">
+              <button class="button large login-form-btn">
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="dropDownSelect1"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="/js/breakpoints.min.js"></script>
+    <script src="/js/browser.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>
