@@ -3609,6 +3609,14 @@ input, select, textarea {
 		margin-top: 10px;
 	}
 
-	.edit-form {
-		/*max-width: 50%;*/
+	.add-customer {
+		float: left;
+	}
+
+	.row.add {
+		margin-bottom: 3%;
+	}
+
+	.row.edit {
+		margin-bottom: 3%;
 	}
