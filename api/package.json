@@ -18,5 +18,9 @@
     "express": "^4.16.4",
     "mysql": "^2.16.0",
     "mysql2": "^1.6.5"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.4",
+    "ejs": "^2.6.1"
   }
 }

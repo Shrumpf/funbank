@@ -19,6 +19,7 @@ exports.login = async function (req, res) {
   try {
     let [result] = await db.query(sql, [token, accountId, password]);
     if (result && result.affectedRows > 0) {
+
       res.status(200).send({ token });
       console.log(`${accountId} logged in`)
     }
@@ -101,11 +102,11 @@ exports.setBalance = async function (req, res) {
 };
 
 // /POST accounts/transfer
-  // {sender, reciever, amout}
+// {sender, reciever, amout}
 exports.transfer = async function (req, res) {
   const token = getToken(req.headers['x-access-token'] || req.headers['authorization']);
   const isAuthenticated = await auth.isAccount(token);
-  const {reciever, sender, amount} = req.body;
+  const { reciever, sender, amount } = req.body;
 
   if (isAuthenticated) {
     let updateSender = `UPDATE accounts SET balance = balance - ? WHERE id = ? and token = ?;`;

@@ -27,6 +27,28 @@ exports.login = async function (req, res) {
   }
 };
 
+exports.employeeLogin = async function(req, res) {
+  const humanId = parseInt(req.body.id);
+  const password = req.body.password;
+
+  const token = "fb" + getRandomInt();
+
+  let sql = `UPDATE humans SET token = ? WHERE id = ? AND pass = ? AND rights > 0`;
+  try {
+    let [result] = await db.query(sql, [token, humanId, password]);
+    if (result && result.affectedRows > 0) {
+      [result] = await db.query(`SELECT token, rights FROM humans WHERE token = ?`, token);
+      return result;
+    }
+    else {
+      return;
+    }
+  }
+  catch (error) {
+    res.status(500).send();
+  }
+}
+
 exports.getToken = async function (req, res) {
   const humanId = parseInt(req.body.id);
   const password = req.body.password;
