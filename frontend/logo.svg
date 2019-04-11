@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="338px" height="280px" viewBox="0 0 338 280" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>Sparfuchs</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Sparfuchs" transform="translate(-59.000000, -43.000000)">
+            <g id="ears" fill="#008080" stroke="#979797">
+                <path d="M170.436832,32.4564216 L171.297352,32.4564216 L170.862963,31.7088209 L170.436832,32.4564216 Z M25.1578713,32.4564216 L24.7317407,31.7088209 L24.2973516,32.4564216 L25.1578713,32.4564216 Z" id="Rectangle" transform="translate(97.797352, 96.456422) rotate(143.000000) translate(-97.797352, -96.456422) "></path>
+                <path d="M431.205361,31.7960269 L432.065881,31.7960269 L431.631492,31.0484262 L431.205361,31.7960269 Z M285.926401,31.7960269 L285.50027,31.0484262 L285.065881,31.7960269 L285.926401,31.7960269 Z M358.565881,160.312952 L358.536188,160.296027 L358.536188,159.796027 L358.595574,159.796027 L358.595574,160.296027 L358.565881,160.312952 Z" id="Rectangle-Copy-17" transform="translate(358.565881, 95.796027) rotate(216.000000) translate(-358.565881, -95.796027) "></path>
+            </g>
+            <g id="face" transform="translate(87.000000, 109.000000)">
+                <polygon id="Line-6" stroke="#979797" fill="#008080" stroke-linecap="square" points="114.203369 0 169 0 286 85.4881635 242.066299 67.7874578 180.235265 97 143.5 213 105.890179 97 44.3784705 67.7874578 1 85.4881635"></polygon>
+                <polyline id="Line-7" stroke="#979797" stroke-linecap="square" points="0 87 143.908555 213 287.81711 87"></polyline>
+                <text id="€" transform="translate(218.500000, 102.000000) rotate(90.000000) translate(-218.500000, -102.000000) " font-family="Roboto-Bold, Roboto" font-size="50" font-weight="bold" fill="#3E3E3C">
+                    <tspan x="204.5" y="121.5">€</tspan>
+                </text>
+                <text id="€-copy" transform="translate(68.500000, 102.000000) rotate(90.000000) translate(-68.500000, -102.000000) " font-family="Roboto-Bold, Roboto" font-size="50" font-weight="bold" fill="#3E3E3C">
+                    <tspan x="54.5" y="121.5">€</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>
