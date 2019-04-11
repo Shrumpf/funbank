@@ -10,6 +10,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/modalsonly/css/bootstrap.min.css">
 	</head>
 	<body class="is-preload">
 
@@ -22,7 +23,7 @@
 
 							<!-- Header -->
 								<header id="header">
-									<a href="index.html" class="logo"><strong>Dashboard Spaßbank</strong></a>
+									<a href="index.html" class="logo"><strong>Spaßbank</strong></a>
 								</header>
 
 							<!-- Banner -->
@@ -71,7 +72,8 @@
 											<td>5</td>
 											<td>5</td>
 											<td>5</td>
-											<td>Funktioniert</td>
+											<td><a href="" data-toggle="modal" data-target="#exampleModal" >404</a></td>
+											<td><input type="submit" value="Auffüllen" class="primary" /></td>
 										  </tr>
 										  <tr>
 											<td>2</td>
@@ -83,7 +85,8 @@
 											<td>5</td>
 											<td>5</td>
 											<td>5</td>
-											<td>Kaputt</td>
+											<td>100</td>
+											<td><input type="submit" value="Auffüllen" class="primary" /></td>
 										  </tr>
 										</tbody>
 									  </table>
@@ -123,12 +126,26 @@
 
 			</div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h3 class="modal-title" id="exampleModalLabel">Wollen Sie {Kunde} wirklich löschen?</h3>
+							</div>
+							<div class="modal-footer">
+								<input type="button" value="Zurück" data-dismiss="modal" />
+								<input type="submit" value="Löschen" class="remove" />
+							</div>
+						</div>
+					</div>
+				</div>
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/modalsonly/js/bootstrap.min.js"></script>
 
 			<script>
 					function myFunction() {
