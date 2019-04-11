@@ -15,6 +15,7 @@ namespace SpasBank
     public class MainWindowLogic
     {
         private User ActiveAccount { get; set; }
+
         private readonly MainWindow Main;
         private HttpClient httpClient;
         private static string baseUrl;
