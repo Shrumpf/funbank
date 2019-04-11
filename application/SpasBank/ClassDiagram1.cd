@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Container Klassen&#xD;&#xA;für Datenbankobjekte">
+    <Position X="0.915" Y="0.524" Height="0.726" Width="1.993" />
+  </Comment>
+  <Class Name="SpasBank.Classes.Atm">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAACIAAAAAIAAAIAAACAAAABAAAAAACI=</HashCode>
+      <FileName>Classes\Atm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpasBank.Classes.AtmEmptyException" Collapsed="true">
+    <Position X="2.75" Y="5.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Atm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpasBank.Classes.User">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAgAAAAAAAAAAAACAAAAAAABAAA=</HashCode>
+      <FileName>Classes\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpasBank.Classes.JsonClasses.AtmContainer">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIABAAAMAIAAQAAAAAAAAAAABAAAIAAAAkA=</HashCode>
+      <FileName>Classes\JsonClasses\AtmContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpasBank.Classes.JsonClasses.Balance">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\JsonClasses\BalanceContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpasBank.Classes.JsonClasses.Token">
+    <Position X="2" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\JsonClasses\Toke.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpasBank.MainWindowLogic">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAEIAAAAAAAAABAAIEAAAAAAoRCAAAJCAAAAI=</HashCode>
+      <FileName>MainWindowLogic.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Main" />
+      <Property Name="ActiveAccount" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpasBank.MainWindow">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAECQIAAAAAAAAAAAAgARAAAAAAQAAAACAQCABABI=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="WindowLogic" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Exception" Collapsed="true">
+    <Position X="3" Y="4" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SpasBank.App" Collapsed="true">
+    <Position X="8.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpasBank.Properties.Resources">
+    <Position X="10.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpasBank.Properties.Settings">
+    <Position X="8.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="SpasBank.ViewEnum">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQCAAAAAAAAAAAAAAAgAAAAUAAAAAAAAAAAQQAEAAAI=</HashCode>
+      <FileName>MainWindowLogic.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
