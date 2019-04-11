@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS humans (
     pass varchar(64) NOT NULL,
     name varchar(64) NOT NULL,
     firstname varchar(64) NOT NULL,
+    city varchar(64) NOT NULL,
     rights tinyint DEFAULT 0 NOT NULL,
     token varchar(255),
     PRIMARY KEY (id)
