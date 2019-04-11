@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920px" height="1080px" viewBox="0 0 1920 1080" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>Kunden</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Kunden">
+            <rect id="Rectangle" stroke="#979797" fill="#FFFFFF" x="0.5" y="0.5" width="1919" height="1079"></rect>
+            <g id="Table" transform="translate(500.000000, 503.000000)">
+                <g id="Row1" transform="translate(0.000000, 150.000000)">
+                    <rect id="Rectangle" stroke="#979797" fill="#F2F2F2" x="0.5" y="0.5" width="1319" height="39"></rect>
+                    <text id="Mustermann" font-family="Roboto-Regular, Roboto" font-size="16" font-weight="normal" fill="#3E3E3C">
+                        <tspan x="10" y="25">Mustermann</tspan>
+                    </text>
+                    <text id="Max" font-family="Roboto-Regular, Roboto" font-size="16" font-weight="normal" fill="#3E3E3C">
+                        <tspan x="192" y="25">Max</tspan>
+                    </text>
+                    <text id="12345" font-family="Roboto-Regular, Roboto" font-size="16" font-weight="normal" fill="#3E3E3C">
+                        <tspan x="389" y="25">12345</tspan>
+                    </text>
+                    <text id="987654" font-family="Roboto-Regular, Roboto" font-size="16" font-weight="normal" fill="#3E3E3C">
+                        <tspan x="639" y="25">987654</tspan>
+                    </text>
+                    <text id="Edit-Copy-2" fill="#008080" font-family="Roboto-Bold, Roboto" font-size="16" font-weight="bold">
+                        <tspan x="1092" y="25">Edit</tspan>
+                    </text>
+                </g>
+                <g id="Row2" transform="translate(0.000000, 190.000000)">
+                    <rect id="Rectangle-Copy-10" stroke="#979797" fill="#FFFFFF" x="0.5" y="0.5" width="1319" height="39"></rect>
+                    <text id="Mustermann-Copy" font-family="Roboto-Regular, Roboto" font-size="16" font-weight="normal" fill="#3E3E3C">
+                        <tspan x="10" y="26">Mustermann</tspan>
+                    </text>
+                    <text id="Max-Copy" font-family="Roboto-Regular, Roboto" font-size="16" font-weight="normal" fill="#3E3E3C">
+                        <tspan x="192" y="26">Max</tspan>
+                    </text>
+                    <text id="12345-copy" font-family="Roboto-Regular, Roboto" font-size="16" font-weight="normal" fill="#3E3E3C">
+                        <tspan x="389" y="26">12345</tspan>
+                    </text>
+                    <text id="987654-copy" font-family="Roboto-Regular, Roboto" font-size="16" font-weight="normal" fill="#3E3E3C">
+                        <tspan x="639" y="26">987654</tspan>
+                    </text>
+                    <text id="Edit-Copy" fill="#008080" font-family="Roboto-Bold, Roboto" font-size="16" font-weight="bold">
+                        <tspan x="1092" y="26">Edit</tspan>
+                    </text>
+                </g>
+                <g id="Row3" transform="translate(0.000000, 230.000000)">
+                    <rect id="Rectangle-Copy-11" stroke="#979797" fill="#F2F2F2" x="0.5" y="0.5" width="1319" height="39"></rect>
+                    <text id="Mustermann-Copy-2" font-family="Roboto-Regular, Roboto" font-size="16" font-weight="normal" fill="#3E3E3C">
+                        <tspan x="10" y="25">Mustermann</tspan>
+                    </text>
+                    <text id="Max-Copy-2" font-family="Roboto-Regular, Roboto" font-size="16" font-weight="normal" fill="#3E3E3C">
+                        <tspan x="192" y="25">Max</tspan>
+                    </text>
+                    <text id="12345-copy-2" font-family="Roboto-Regular, Roboto" font-size="16" font-weight="normal" fill="#3E3E3C">
+                        <tspan x="389" y="25">12345</tspan>
+                    </text>
+                    <text id="987654-copy-2" font-family="Roboto-Regular, Roboto" font-size="16" font-weight="normal" fill="#3E3E3C">
+                        <tspan x="639" y="25">987654</tspan>
+                    </text>
+                    <text id="Edit" fill="#008080" font-family="Roboto-Bold, Roboto" font-size="16" font-weight="bold">
+                        <tspan x="1092" y="27">Edit</tspan>
+                    </text>
+                </g>
+                <g id="TableHead" transform="translate(10.000000, 116.000000)" fill="#3E3E3C" font-family="Roboto-Bold, Roboto" font-size="16" font-weight="bold">
+                    <text id="Kundennummer">
+                        <tspan x="379" y="15">Kundennummer</tspan>
+                    </text>
+                    <text id="Kontonummer/n">
+                        <tspan x="629" y="15">Kontonummer/n</tspan>
+                    </text>
+                    <text id="Name">
+                        <tspan x="0" y="15">Name</tspan>
+                    </text>
+                    <text id="Vorname">
+                        <tspan x="178" y="15">Vorname</tspan>
+                    </text>
+                </g>
+                <g id="Searchbar" transform="translate(1082.000000, 0.000000)">
+                    <rect id="Rectangle" stroke="#979797" fill="#FFFFFF" x="0.5" y="0.5" width="237" height="39" rx="5"></rect>
+                    <text id="Search-for-names" fill="#A0A0A0" font-family="Roboto-Bold, Roboto" font-size="14" font-weight="bold">
+                        <tspan x="17" y="24">Search for names</tspan>
+                    </text>
+                </g>
+            </g>
+            <text id="LOREM-IPSUM-DOLOR-SI" fill="#767676" font-family="Roboto-Bold, Roboto" font-size="16" font-weight="bold">
+                <tspan x="500" y="297">LOREM IPSUM DOLOR SIT AMET</tspan>
+            </text>
+            <text id="Kundenübersicht" font-family="Roboto-Bold, Roboto" font-size="50" font-weight="bold" fill="#3E3E3C">
+                <tspan x="500" y="255">Kundenübersicht</tspan>
+            </text>
+            <g id="Menu-Icon" transform="translate(430.000000, 40.000000)" fill="#008080">
+                <rect id="Rectangle" x="0" y="0" width="25" height="5" rx="1"></rect>
+                <rect id="Rectangle-Copy-2" x="0" y="8" width="25" height="5" rx="1"></rect>
+                <rect id="Rectangle-Copy-3" x="0" y="16" width="25" height="5" rx="1"></rect>
+            </g>
+            <g id="Sidebar">
+                <rect id="Menu" stroke="#979797" fill="#F5F6F7" x="0.5" y="0.5" width="399" height="1079"></rect>
+                <path d="M50,199 L105,199" id="Line-2" stroke="#008080" stroke-width="2" stroke-linecap="square"></path>
+                <text id="Menu" font-family="Roboto-Bold, Roboto" font-size="18" font-weight="bold" fill="#3E3E3C">
+                    <tspan x="50" y="187">Menu</tspan>
+                </text>
+                <text id="Dashboard" font-family="Roboto-Medium, Roboto" font-size="14" font-weight="400" fill="#3E3E3C">
+                    <tspan x="50" y="282">Dashboard</tspan>
+                </text>
+                <text id="Kunden" fill="#008080" font-family="Roboto-Medium, Roboto" font-size="14" font-weight="400">
+                    <tspan x="50" y="328">Kunden</tspan>
+                </text>
+                <text id="Bankautomaten" font-family="Roboto-Medium, Roboto" font-size="14" font-weight="400" fill="#3E3E3C">
+                    <tspan x="50" y="374">Bankautomaten</tspan>
+                </text>
+                <path d="M50,300.5 L350,300.5" id="Line-3" stroke="#979797" stroke-linecap="square"></path>
+                <path d="M50,346.5 L350,346.5" id="Line-3-Copy" stroke="#979797" stroke-linecap="square"></path>
+                <path d="M50,746.5 L350,746.5" id="Line-3-Copy-2" stroke="#979797" stroke-width="2" stroke-linecap="square"></path>
+                <text id="©All-rights-reserved" font-family="Roboto-Regular, Roboto" font-size="12" font-weight="normal" fill="#3E3E3C">
+                    <tspan x="50" y="772">©All rights reserved by Scrum-Ninjas.</tspan>
+                </text>
+                <g id="Searchbar" transform="translate(50.000000, 30.000000)">
+                    <rect id="Rectangle" stroke="#979797" fill="#FFFFFF" x="0.5" y="0.5" width="299" height="39" rx="5"></rect>
+                    <g id="Search-Icon" transform="translate(264.000000, 11.000000)" stroke="#979797" stroke-width="2">
+                        <rect id="Rectangle" x="3" y="1" width="12" height="11" rx="5.5"></rect>
+                        <path d="M0.5,18.5 L5.5,11.5" id="Line" stroke-linecap="square"></path>
+                    </g>
+                    <text id="Search" fill="#A0A0A0" font-family="Roboto-Bold, Roboto" font-size="14" font-weight="bold">
+                        <tspan x="20" y="24">Search</tspan>
+                    </text>
+                </g>
+            </g>
+            <g id="Searchbar-Copy" transform="translate(1582.000000, 503.000000)"></g>
+            <text id="Spaßbank" font-family="Roboto-Bold, Roboto" font-size="16" font-weight="bold" fill="#3E3E3C">
+                <tspan x="500" y="115">Spaßbank</tspan>
+            </text>
+            <rect id="Rectangle" fill="#008080" x="500" y="134" width="1320" height="5"></rect>
+            <rect id="Rectangle-Copy-4" fill="#D2D7D9" x="500" y="401" width="1320" height="2"></rect>
+        </g>
+    </g>
+</svg>
