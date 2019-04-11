@@ -37,6 +37,7 @@ async function main() {
   // app.post('/v1/accounts', accounts.createAccount);
   app.get('/v1/accounts/:id/getBalance', accounts.getBalance);
   app.put('/v1/accounts/:id/setBalance', accounts.setBalance);
+  app.post('/v1/accounts/transfer', accounts.transfer);
 
   app.post('/v1/humans/login', humans.login);
   app.post('/v1/humans/token', humans.getToken);

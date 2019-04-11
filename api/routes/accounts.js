@@ -99,3 +99,32 @@ exports.setBalance = async function (req, res) {
     res.status(403).send();
   }
 };
+
+// /POST accounts/transfer
+  // {sender, reciever, amout}
+exports.transfer = async function (req, res) {
+  const token = getToken(req.headers['x-access-token'] || req.headers['authorization']);
+  const isAuthenticated = await auth.isAccount(token);
+  const {reciever, sender, amount} = req.body;
+
+  if (isAuthenticated) {
+    let updateSender = `UPDATE accounts SET balance = balance - ? WHERE id = ? and token = ?;`;
+    let updateReviever = `UPDATE accounts SET balance = balance + ? WHERE id = ?;`
+    let transfer = `INSERT INTO transfers (sender, reciever, amount) VALUES (?, ?, ?);`
+
+    try {
+      await db.query(updateSender, [amount, sender, token]);
+      await db.query(updateReviever, [amount, reciever]);
+      await db.query(transfer, [sender, reciever, amount]);
+
+      res.status(200).send();
+      console.log(`Transfered ${amount}€ from Account ${sender} to Account ${reciever}`);
+    }
+    catch (error) {
+      res.status(500).send();
+    }
+  }
+  else {
+    res.status(403).send();
+  }
+}
