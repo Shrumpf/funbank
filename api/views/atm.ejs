@@ -1,0 +1,145 @@
+<%- include('partials/header'); %>
+
+          <!-- Banner -->
+          <section id="banner">
+            <div class="content">
+              <header>
+                <h1>Automatenübersicht</h1>
+                <p>Lorem Ipsum dolor sit amet</p>
+              </header>
+            </div>
+          </section>
+
+          <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Suche nach ID" />
+          <table
+            id="myTable"
+            class="table table-striped table-bordered table-sm"
+            cellspacing="0"
+            width="100%"
+          >
+            <thead>
+              <tr class="header">
+                <th class="th-sm">ID</th>
+                <th class="th-sm">PLZ</th>
+                <th class="th-sm">500€</th>
+                <th class="th-sm">200€</th>
+                <th class="th-sm">100€</th>
+                <th class="th-sm">50€</th>
+                <th class="th-sm">20€</th>
+                <th class="th-sm">10€</th>
+                <th class="th-sm">5€</th>
+                <th class="th-sm">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% atm.forEach(function(at) { %>
+              <tr>
+                <td><%= at.id %></td>
+                <td><%= at.zip %></td>
+                <td><%= at.fivehundred %></td>
+                <td><%= at.twohundred %></td>
+                <td><%= at.onehundred %></td>
+                <td><%= at.fifty %></td>
+                <td><%= at.twenty %></td>
+                <td><%= at.ten %></td>
+                <td><%= at.five %></td>
+                <td title="<%= 'Okay'%>"><%= at.status ? at.status : "200"%></td>
+                <td>
+                  <input type="button" onclick="fillAtm(<%=at.id%>)" value="Auffüllen" class="primary" />
+                </td>
+              </tr>
+              <%}); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <%- include('partials/sidebar'); %>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Wollen Sie {Kunde} wirklich löschen?</h3>
+          </div>
+          <div class="modal-footer">
+            <input type="button" value="Zurück" data-dismiss="modal" />
+            <input type="submit" value="Löschen" class="remove" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Scripts -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/browser.min.js"></script>
+    <script src="js/breakpoints.min.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/main.js"></script>
+    <script src="modalsonly/js/bootstrap.min.js"></script>
+
+    <script>
+      function myFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById('myInput');
+        filter = input.value.toUpperCase();
+        table = document.getElementById('myTable');
+        tr = table.getElementsByTagName('tr');
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName('td')[0];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = '';
+            } else {
+              tr[i].style.display = 'none';
+            }
+          }
+        }
+      }
+    </script>
+
+    <script>
+      function fillAtm(id) {
+        var data = JSON.stringify({
+          id: 1,
+          fivehundred: 10,
+          twohundred: 20,
+          onehundred: 40,
+          fifty: 80,
+          twenty: 100,
+          ten: 120,
+          five: 150,
+          zip: '07747'
+        });
+
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener('readystatechange', function() {
+          if (this.readyState === 4) {
+            window.location.reload();
+          }
+        });
+
+        xhr.open('PUT', '/v1/atm/' + id);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('Authorization', 'Bearer <%=token%>');
+
+        xhr.send(data);
+      }
+    </script>
+  </body>
+</html>

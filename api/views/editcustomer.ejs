@@ -1,0 +1,159 @@
+<%- include('partials/header'); %>
+
+          <!-- Banner -->
+          <section id="banner">
+            <div class="content">
+              <header>
+                <h1>{Kunde} bearbeiten</h1>
+                <p>Lorem Ipsum dolor sit amet</p>
+              </header>
+            </div>
+          </section>
+
+          <div class="edit-form">
+            <form method="post" action="/customers/<%=customer.id%>/edit">
+              <div class="row edit">
+                <div class="col-6">
+                  <h4 class="form-label">
+                    Name
+                  </h4>
+                  <div class="validate-input" data-validate="">
+                    <input class="input" type="text" name="name" value="<%=customer.name%>" />
+                    <span class="focus-input"></span>
+                  </div>
+
+                  <h4 class="form-label">
+                    Vorname
+                  </h4>
+                  <div class="validate-input" data-validate="">
+                    <input class="input" type="text" name="firstname" value="<%= customer.firstname%>" />
+                    <span class="focus-input"></span>
+                  </div>
+
+                  <h4 class="form-label">
+                      Stadt
+                    </h4>
+                    <div class="validate-input" data-validate="">
+                      <input class="input" type="text" name="city" value="<%= customer.city%>" />
+                      <span class="focus-input"></span>
+                    </div>
+                </div>
+                <div class="col-6">
+                  <h4 class="form-label">
+                    Kontonummer/n
+                  </h4>
+                  <table
+                    id="myTable"
+                    class="table table-striped table-bordered table-sm"
+                    cellspacing="0"
+                    width="100%"
+                  >
+                    <tbody>
+                      <% customer.accountIds.forEach(function(accountId) { %>
+                      <tr>
+                        <td><%= accountId %></td>
+                        <% if (customer.accountIds.length > 1) { %>
+                        <td>
+                          <i
+                            style="cursor: pointer"
+                            onclick="deleteAccount(<%=accountId%>)"
+                            class="icon fa-remove"
+                          ></i>
+                        </td>
+                        <%}%>
+                      </tr>
+                      <%}); %>
+                    </tbody>
+                  </table>
+                  <input type="button" onclick="addAccount(<%=customer.id%>)" value="Konto hinzufügen" class="primary" />
+                </div>
+              </div>
+
+              <div class="col-12">
+                <input type="submit" value="Update" class="primary" />
+                <input type="button" value="Zurück" onclick="window.location = '/customers'" />
+
+                <input
+                  type="button"
+                  value="Löschen"
+                  class="remove"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <%- include('partials/sidebar'); %>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Wollen Sie {Kunde} wirklich löschen?</h3>
+          </div>
+          <div class="modal-footer">
+            <input type="button" value="Zurück" data-dismiss="modal" />
+            <input type="button" value="Löschen" class="remove" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Scripts -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/browser.min.js"></script>
+    <script src="/js/breakpoints.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/modalsonly/js/bootstrap.min.js"></script>
+
+    <script>
+      function deleteAccount(id) {
+        var data = null;
+
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener('readystatechange', function() {
+          if (this.readyState === 4) {
+            window.location.reload();
+          }
+        });
+
+        xhr.open('DELETE', '/v1/accounts/'+id);
+        xhr.setRequestHeader('Authorization', 'Bearer <%=token%>');
+
+        xhr.send(data);
+      }
+
+      function addAccount(id) {
+        var data = null;
+
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener('readystatechange', function() {
+          if (this.readyState === 4) {
+            window.location.reload();
+          }
+        });
+
+        xhr.open('PUT', '/v1/humans/'+id+'/account');
+        xhr.setRequestHeader('Authorization', 'Bearer <%=token%>');
+
+        xhr.send(data);
+      }
+    </script>
+  </body>
+</html>
