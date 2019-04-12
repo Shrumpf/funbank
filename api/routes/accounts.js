@@ -129,3 +129,45 @@ exports.transfer = async function (req, res) {
     res.status(403).send();
   }
 }
+
+exports.deleteAccount = async function (req, res) {
+  const accountId = parseInt(req.params.id);
+  const token = getToken(req.headers['x-access-token'] || req.headers['authorization']);
+  const isAuthenticated = await auth.isEmployee(token);
+
+  if (isAuthenticated) {
+    let sql = `DELETE FROM accounts WHERE id = ?`;
+    try {
+      const [result] = await db.query(sql, [accountId]);
+      res.status(200).send();
+      console.log(`delete account ${accountId}`);
+    }
+    catch (error) {
+      res.status(500).send();
+    }
+  }
+  else {
+    res.status(403).send();
+  }
+}
+
+exports.createAccount = async function(req, res) {
+  const humanId = parseInt(req.params.id);
+  const token = getToken(req.headers['x-access-token'] || req.headers['authorization']);
+  const isAuthenticated = await auth.isEmployee(token);
+
+  if (isAuthenticated) {
+    let sql = `INSERT INTO accounts (humanId, pass) VALUES (?, ?)`;
+    try {
+      const [result] = await db.query(sql, [humanId, '12345']);
+      res.status(200).send();
+      console.log(`create account for ${humanId}`);
+    }
+    catch (error) {
+      res.status(500).send();
+    }
+  }
+  else {
+    res.status(403).send();
+  }
+}

@@ -27,7 +27,7 @@ exports.login = async function (req, res) {
   }
 };
 
-exports.employeeLogin = async function(req, res) {
+exports.employeeLogin = async function (req, res) {
   const humanId = parseInt(req.body.id);
   const password = req.body.password;
 
@@ -68,12 +68,12 @@ exports.getToken = async function (req, res) {
   }
 };
 
-exports.getCustomers = async function (req, res) {
+exports.getCustomers = async function (req, res, isWeb = false) {
   const token = getToken(req.headers['x-access-token'] || req.headers['authorization']);
   const isAuthenticated = await auth.isEmployee(token);
 
   if (isAuthenticated) {
-    let sql = `SELECT h.id, h.name, h.firstname,
+    let sql = `SELECT h.id, h.name, h.firstname, h.city,
     (SELECT GROUP_CONCAT(id SEPARATOR ',')
         FROM accounts
         WHERE humanId = h.id) as accountIds
@@ -81,14 +81,22 @@ exports.getCustomers = async function (req, res) {
     WHERE h.rights = 0`;
 
     let result = await db.query(sql);
-    res.send(result[0].map((itm, idx) => {
+    result = result[0].map((itm, idx) => {
       return {
         id: itm.id,
         name: itm.name,
         firstname: itm.firstname,
+        city: itm.city,
         accountIds: itm.accountIds.split(',')
       }
-    }));
+    });
+
+    if (isWeb) {
+      return result;
+    }
+    else {
+      res.send(result);
+    }
   }
   else {
     res.status(403).send();
@@ -104,14 +112,14 @@ function getToken(bearerToken) {
   return bearerToken;
 }
 
-exports.getCustomerById = async function (req, res) {
+exports.getCustomerById = async function (req, res, isWeb = false) {
   const token = getToken(req.headers['x-access-token'] || req.headers['authorization']);
   const isAuthenticated = await auth.isEmployee(token);
   const accountId = req.params.id;
 
 
   if (isAuthenticated) {
-    let sql = `SELECT h.id, h.name, h.firstname,
+    let sql = `SELECT h.id, h.name, h.firstname, h.city,
     (SELECT GROUP_CONCAT(id SEPARATOR ',')
         FROM accounts
         WHERE humanId = h.id) as accountIds
@@ -122,14 +130,21 @@ exports.getCustomerById = async function (req, res) {
     let result = await db.query(sql, [accountId]);
 
     if (result.length > 0) {
-      res.send(result[0].map((itm, idx) => {
+      result = result[0].map((itm, idx) => {
         return {
           id: itm.id,
           name: itm.name,
           firstname: itm.firstname,
+          city: itm.city,
           accountIds: itm.accountIds.split(',')
         }
-      }));
+      })
+      if (isWeb) {
+        return result;
+      }
+      else {
+        res.send(result);
+      }
     } else {
       res.status(404).send();
     }
@@ -138,3 +153,25 @@ exports.getCustomerById = async function (req, res) {
     res.status(403).send();
   }
 }
+
+exports.editCustomer = async function (req, res) {
+  const token = getToken(req.headers['x-access-token'] || req.headers['authorization']);
+  const isAuthenticated = await auth.isEmployee(token);
+  const accountId = req.params.id;
+  const { name, firstname, city } = req.body;
+
+  if (isAuthenticated) {
+    let sql = `UPDATE humans SET name = ?, firstname = ?, city = ? WHERE id = ?`;
+
+    let [result] = await db.query(sql, [name, firstname, city, accountId]);
+
+    if (result && result.affectedRows > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  else {
+    return;
+  }
+};

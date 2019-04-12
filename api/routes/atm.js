@@ -18,11 +18,11 @@ function getToken(bearerToken) {
     return bearerToken;
 }
 
-exports.getAtm = async function (req, res) {
+exports.getAtm = async function (req, res, isWeb = false) {
     const token = getToken(req.headers['x-access-token'] || req.headers['authorization']);
     let isAuthenticated;
     if (token.startsWith('fb')) {
-        isAuthenticated = await auth.isAccount(token);
+        isAuthenticated = await auth.isEmployee(token);
     }
     else {
         isAuthenticated = await auth.isAtm(atmId, token);
@@ -33,7 +33,12 @@ exports.getAtm = async function (req, res) {
         onehundred, fifty, twenty, ten, five, zip FROM atm`;
         try {
             const [result] = await db.query(sql);
-            res.send(result[0]);
+            if (isWeb) {
+                return result;
+            }
+            else {
+                res.send(result);
+            }
             console.log(`getAtm}`);
         }
         catch (error) {
@@ -79,6 +84,7 @@ exports.setBills = async function (req, res) {
     let isAuthenticated;
     if (token.startsWith('fb')) {
         isAuthenticated = await auth.isAccount(token);
+        if (!isAuthenticated) isAuthenticated = await auth.isEmployee(token);
     }
     else {
         isAuthenticated = await auth.isAtm(atmId, token);
@@ -89,7 +95,7 @@ exports.setBills = async function (req, res) {
     if (isAuthenticated) {
         let sql = `UPDATE atm SET fivehundred = ?, twohundred = ?, onehundred = ?, fifty = ?, twenty = ?, ten = ?, five = ? WHERE id = ?`;
         try {
-            const [result] = await db.query(sql, [b.fivehundred, b.twohundred, b.onehundred, b.fifty, b.twenty, b.ten, b.five, atmId, token]);
+            const [result] = await db.query(sql, [b.fivehundred, b.twohundred, b.onehundred, b.fifty, b.twenty, b.ten, b.five, atmId]);
             if (result.affectedRows > 0) {
                 res.status(200).send();
                 console.log(`set bills from atm: ${atmId} set to ${b}`);
