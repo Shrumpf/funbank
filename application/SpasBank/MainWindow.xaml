@@ -63,6 +63,7 @@
             <TextBox x:Name="PurposeBox" HorizontalAlignment="Left" Height="23" Margin="132,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="382"/>
             <TextBox x:Name="TransactionAmountBox" HorizontalAlignment="Left" Height="23" Margin="132,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="382" PreviewTextInput="DoubleBox_OnPreviewTextInput"/>
             <Button x:Name="TransactionActionButton" Content="Überweisen" Click="TransactionActionButton_Click" HorizontalAlignment="Left" Height="56" Margin="132,161,0,0" VerticalAlignment="Top" Width="282" FontSize="36"/>
+            <Button x:Name="EmptyTransactionButton" Content="Alle Felder leeren" HorizontalAlignment="Left" Margin="528,40,0,0" VerticalAlignment="Top" Width="195" Height="84" FontSize="20" Click="ClearTransactionButton_Click"/>
         </Grid>
         <Grid x:Name="BalanceGrid" Margin="0,0,0,120" Visibility="Collapsed" Background="LightBlue">
             <Label Content="Ihr aktueller Kontostand beträgt:" HorizontalAlignment="Left" Margin="302,46,0,0" VerticalAlignment="Top"/>
