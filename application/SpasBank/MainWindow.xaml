@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpasBank"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" MinWidth="800" MinHeight="450">
-    <Grid Margin="0">
-        <Grid x:Name="LoginGrid" HorizontalAlignment="Left" Height="351" Margin="55,27,0,0" VerticalAlignment="Top" Width="687" Visibility="Visible">
+        Title="MainWindow" Height="450" Width="800" MinWidth="800" MinHeight="450" ResizeMode="NoResize">
+    <Grid Margin="0" Background="LightBlue">
+        <Grid x:Name="LoginGrid" HorizontalAlignment="Left" Background="LightBlue" Height="351" Margin="55,27,0,0" VerticalAlignment="Top" Width="687" Visibility="Visible">
             <TextBox x:Name="AccountNumberField" Height="23" Margin="220,86,211,0" TextWrapping="Wrap" VerticalAlignment="Top" PreviewTextInput="IntegerBox_OnPreviewTextInput"/>
             <Label Content="Kontonummer:" HorizontalAlignment="Left" Margin="126,82,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.207,0.423"/>
             <PasswordBox x:Name="PasswordField" HorizontalAlignment="Left" Margin="220,138,0,0" VerticalAlignment="Top" Width="256"/>
@@ -15,7 +15,7 @@
             <Label Content="Passwort:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="155,134,0,0" RenderTransformOrigin="0.632,1.462"/>
             <Label x:Name="LoginFailMessage" Content="Login fehlgeschlagen" HorizontalAlignment="Left" Margin="278,205,0,0" VerticalAlignment="Top" Visibility="Hidden" Foreground="#FFD40A0A"/>
         </Grid>
-        <Grid x:Name="MainMenuGrid" Margin="0,0,0,0" Visibility="Collapsed">
+        <Grid x:Name="MainMenuGrid" Margin="0,0,0,0" Background="LightBlue" Visibility="Collapsed">
             <Button x:Name="WithdrawMenuButton" Content="Abheben" Height="70" Margin="61,26,0,0" VerticalAlignment="Top" Click="WithdrawMenuButton_Click" FontSize="48" HorizontalAlignment="Left" Width="326"/>
             <Button x:Name="DepositMenuButton" Content="Einzahlen" Height="70" Margin="0,26,27,0" VerticalAlignment="Top" Click="DepositMenuButton_Click" FontSize="48" HorizontalAlignment="Right" Width="326"/>
             <Button x:Name="TransactionMenuButton" Content="Überweisung" HorizontalAlignment="Left" Margin="61,138,0,0" Width="326" Click="TransactionMenuButton_Click" FontSize="48" Height="70" VerticalAlignment="Top"/>
@@ -24,14 +24,14 @@
             <Label x:Name="MainMenuSuccessLabel" Content="Aktion Erfolgreich!" HorizontalAlignment="Left" Height="30" Margin="322,235,0,0" VerticalAlignment="Top" Width="208" FontSize="16" Visibility="Hidden"/>
             <Label x:Name="MainMenuFailedLabel" Content="Aktion Fehlgeschlagen!" HorizontalAlignment="Left" Height="30" Margin="322,235,0,0" VerticalAlignment="Top" Width="208" FontSize="16" Visibility="Hidden"/>
         </Grid>
-        <Grid x:Name="WithdrawGrid" Margin="0,0,0,120" Visibility="Collapsed">
+        <Grid x:Name="WithdrawGrid" Margin="0,0,0,120" Background="LightBlue" Visibility="Collapsed">
             <TextBox x:Name="WithdrawAmountBox" Height="54" Margin="239,60,227,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36" PreviewTextInput="IntegerBox_OnPreviewTextInput"/>
             <Label Content="Menge:" Margin="110,56,553,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,-0.154" FontSize="36"/>
             <Button x:Name="WithdrawActionButton" Content="Abheben" Margin="239,137,227,0" Click="WithdrawActionButton_Click" FontSize="48" Height="80" VerticalAlignment="Top"/>
             <Label x:Name="TakeMoneyLabel" Content="Bitte entnehmen sie ihr Geld" Height="42" Margin="239,222,227,0" VerticalAlignment="Top" FontSize="18" Visibility="Hidden"/>
             <Label x:Name="TakeMoneyFailed" Content="Prüfen Sie ihren Kontostand!" Height="42" Margin="239,222,227,0" VerticalAlignment="Top" FontSize="18" Visibility="Hidden"/>
         </Grid>
-        <Grid x:Name="DepositGrid" Margin="0,0,0,120" Visibility="Collapsed">
+        <Grid x:Name="DepositGrid" Margin="0,0,0,120" Visibility="Collapsed" Background="LightBlue">
             <Button x:Name="DepositActionButton" Content="Einzahlen" Margin="233,175,233,0" Click="DepositActionButton_Click" FontSize="48" Height="80" VerticalAlignment="Top"/>
             <Grid Height="142" Margin="42,10,88,0" VerticalAlignment="Top">
                 <TextBox x:Name="FiveHundredBox"  HorizontalAlignment="Left" Height="50" Margin="95,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" FontSize="36"  TextAlignment="Right" PreviewTextInput="IntegerBox_OnPreviewTextInput"/>
@@ -52,7 +52,7 @@
                 <Label Content="Anzahl" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Margin="8,64,0,0"/>
             </Grid>
         </Grid>
-        <Grid x:Name="TransactionGrid" Margin="0,0,0,120" Visibility="Collapsed">
+        <Grid x:Name="TransactionGrid" Margin="0,0,0,120" Visibility="Collapsed" Background="LightBlue">
             <Label Content="Empfänger Daten:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
             <Label Content="Name:" HorizontalAlignment="Left" Margin="83,36,0,0" VerticalAlignment="Top"/>
             <Label Content="Kontonummer:" HorizontalAlignment="Left" Margin="38,67,0,0" VerticalAlignment="Top" />
@@ -64,15 +64,15 @@
             <TextBox x:Name="TransactionAmountBox" HorizontalAlignment="Left" Height="23" Margin="132,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="382" PreviewTextInput="DoubleBox_OnPreviewTextInput"/>
             <Button x:Name="TransactionActionButton" Content="Überweisen" Click="TransactionActionButton_Click" HorizontalAlignment="Left" Height="56" Margin="132,161,0,0" VerticalAlignment="Top" Width="282" FontSize="36"/>
         </Grid>
-        <Grid x:Name="BalanceGrid" Margin="0,0,0,120" Visibility="Collapsed">
+        <Grid x:Name="BalanceGrid" Margin="0,0,0,120" Visibility="Collapsed" Background="LightBlue">
             <Label Content="Ihr aktueller Kontostand beträgt:" HorizontalAlignment="Left" Margin="302,46,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="BalanceBox" HorizontalAlignment="Left" Height="23" Margin="166,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="434" IsReadOnly="True" TextAlignment="Right"/>
             <Label Content="€" HorizontalAlignment="Left" Margin="605,90,0,0" VerticalAlignment="Top"/>
         </Grid>
-        <Grid x:Name="BackGrid" Height="120" VerticalAlignment="Bottom" Visibility="Collapsed">
+        <Grid x:Name="BackGrid" Height="120" VerticalAlignment="Bottom" Visibility="Collapsed" Background="LightBlue">
             <Button x:Name="BackButton" Content="Zurück" Margin="233,10,233,0" Click="BackButton_Click" FontSize="48" Height="80" VerticalAlignment="Top"/>
         </Grid>
-        <Grid x:Name="WaitingGrid" HorizontalAlignment="Left" Height="351" Margin="55,27,0,0" VerticalAlignment="Top" Width="687" Visibility="Collapsed">
+        <Grid x:Name="WaitingGrid" HorizontalAlignment="Left" Height="351" Margin="55,27,0,0" VerticalAlignment="Top" Width="687" Visibility="Collapsed" Background="LightBlue">
             <Label Content="         Bitte Warten&#xD;&#xA;Anfrage wird bearbeitet" Height="300" Margin="10,65,10,0" VerticalAlignment="Top" FontSize="72"/>
         </Grid>
 
