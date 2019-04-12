@@ -60,6 +60,6 @@ CREATE TABLE IF NOT EXISTS transfers(
     amount DOUBLE(10, 2) NOT NULL,
     transferDate datetime DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
-    FOREIGN KEY (sender) REFERENCES accounts(id),
-    FOREIGN KEY (reciever) REFERENCES accounts(id)
+    FOREIGN KEY (sender) REFERENCES accounts(id) ON DELETE CASCADE,
+    FOREIGN KEY (reciever) REFERENCES accounts(id) ON DELETE CASCADE
 );
