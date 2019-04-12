@@ -19,9 +19,11 @@ exports.login = async function (req, res) {
   try {
     let [result] = await db.query(sql, [token, accountId, password]);
     if (result && result.affectedRows > 0) {
-
       res.status(200).send({ token });
       console.log(`${accountId} logged in`)
+    }
+    else {
+      res.status(500).send();
     }
   }
   catch (error) {
@@ -151,7 +153,7 @@ exports.deleteAccount = async function (req, res) {
   }
 }
 
-exports.createAccount = async function(req, res) {
+exports.createAccount = async function (req, res) {
   const humanId = parseInt(req.params.id);
   const token = getToken(req.headers['x-access-token'] || req.headers['authorization']);
   const isAuthenticated = await auth.isEmployee(token);
